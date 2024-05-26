@@ -18,4 +18,7 @@
 // Device name for the Google Stadia Controller.
 #define remote_device_name "StadiaBWVQ-855f"
 
+// Toggle debug logging for the GATT client
+#define GATTC_DEBUG 0
+
 #endif /* #ifndef _GLOBALCONST_H_ */

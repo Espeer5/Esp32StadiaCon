@@ -12,6 +12,7 @@
  * https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_security_client
 */
 
+#include "rep_queue.c"
 #include "gattc.h"
 #include "auth_gap.h"
 #include "globalconst.c"
@@ -336,6 +337,12 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
             ESP_LOGI(GATTC_TAG, "ESP_GATTC_NOTIFY_EVT, receive notify value:");
             esp_log_buffer_hex(GATTC_TAG, p_data->notify.value,
                                p_data->notify.value_len);
+            StadiaRep_t *rep = load_stadia_rep(p_data->notify.value,
+                                               p_data->notify.value_len);
+            if (rep != NULL) {
+                print_stadia_rep(rep);
+                free(rep);
+            }
             break;
         
         // Response to writing to a characteristic descriptor. Ensure success.
