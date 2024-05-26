@@ -6,10 +6,15 @@
 
 #include "bt_init.h"
 #include "auth_gap.h"
+#include "rep_queue.h"
+
+RepQueue_t *repQueue;
 
 void app_main(void) {
     // Initialize the NVS storage for the Bluetooth controller
     bt_nvs_init();
+    // Initialize the Stadia Report Queue
+    repQueue = create_stadia_rep_queue();
     // Initialize the Bluetooth controller
     bt_controller_init();
     // Initialize the Bluetooth stack

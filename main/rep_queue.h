@@ -1,5 +1,5 @@
 /**
- * @file RepQueue.h
+ * @file rep_queue.h
  * @brief Method prototypes for the RepQueue class.
  * 
  * A RepQueue is a queue of reports that are received from the Google Stadia 
@@ -62,5 +62,61 @@ StadiaRep_t *load_stadia_rep(uint8_t* buffer, size_t len);
  * @param rep A pointer to the StadiaRep to print.
 */
 void print_stadia_rep(StadiaRep_t* rep);
+
+/**
+ * @brief A queue element for a queue of stadia reports.
+ * 
+ * This struct is used to store a StadiaRep and a pointer to the next element
+ * in the queue.
+*/
+typedef struct RepQueueElement {
+    StadiaRep_t *rep;
+    struct RepQueueElement *next;
+} RepQueueElement_t;
+
+/*
+ * @brief A queue of Stadia reports.
+ * 
+ * This struct is used to store a queue of Stadia reports. The queue is a 
+ * singly linked list of StadiaQueueElements.
+*/
+typedef struct RepQueue {
+    RepQueueElement_t *head;
+    RepQueueElement_t *tail;
+    size_t size;
+} RepQueue_t;
+
+// The global report queue
+extern RepQueue_t *repQueue;
+
+/**
+ * @brief Create a new StadiaQueue.
+ * 
+ * @return a pointer to the new StadiaQueue.
+*/
+RepQueue_t *create_stadia_rep_queue();
+
+/**
+ * @brief Insert a StadiaRep into the queue.
+ * 
+ * @param queue The queue to insert into.
+ * @param rep The StadiaRep to insert.
+*/
+void insert_stadia_rep(RepQueue_t *queue, StadiaRep_t *rep);
+
+/**
+ * @brief Dequeue a StadiaRep from the queue.
+ * 
+ * @param queue The queue to remove from.
+ * @return a pointer to the StadiaRep that was removed.
+*/
+StadiaRep_t *dequeue_stadia_rep(RepQueue_t *queue);
+
+/**
+ * @brief Print a RepQueue to the console for debugging.
+ * 
+ * @param queue The RepQueue to print.
+*/
+void print_rep_queue(RepQueue_t *queue);
 
 #endif /* #ifndef _REP_QUEUE_H_ */

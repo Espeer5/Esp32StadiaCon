@@ -12,7 +12,7 @@
  * https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_security_client
 */
 
-#include "rep_queue.c"
+#include "rep_queue.h"
 #include "gattc.h"
 #include "auth_gap.h"
 #include "globalconst.c"
@@ -340,8 +340,7 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
             StadiaRep_t *rep = load_stadia_rep(p_data->notify.value,
                                                p_data->notify.value_len);
             if (rep != NULL) {
-                print_stadia_rep(rep);
-                free(rep);
+                insert_stadia_rep(repQueue, rep);
             }
             break;
         
