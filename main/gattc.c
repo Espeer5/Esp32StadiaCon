@@ -51,16 +51,19 @@ static esp_bt_uuid_t remote_filter_service_uuid = {
 
 void esp_gattc_cb(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if,
                          esp_ble_gattc_cb_param_t *param) {
-    ESP_LOGI(GATTC_TAG, "EVT %d, gattc if %d", event, gattc_if);
+    if (GATTC_DEBUG) {
+        ESP_LOGI(GATTC_TAG, "EVT %d, gattc if %d", event, gattc_if);
+    }
 
     // If event is register event, store the gattc_if for each profile
     if (event == ESP_GATTC_REG_EVT) {
         if (param->reg.status == ESP_GATT_OK) {
             gl_profile_tab[param->reg.app_id].gattc_if = gattc_if;
         } else {
-            ESP_LOGI(GATTC_TAG, "Reg app failed, app_id %04x, status %d",
-                    param->reg.app_id,
-                    param->reg.status);
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "Reg app failed, app_id %04x, status %d",
+                        param->reg.app_id, param->reg.status);
+            }
             return;
         }
     }
@@ -92,7 +95,6 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
     switch (event) {
         // Resiters the GATT client with the BLE stack. Set the local privacy
         case ESP_GATTC_REG_EVT:
-            ESP_LOGI(GATTC_TAG, "REG_EVT");
             esp_ble_gap_config_local_privacy(true);
             break;
 
@@ -103,16 +105,20 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
                          p_data->open.status);
                 break;
             }
-            ESP_LOGI(GATTC_TAG, "open success");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "open success");
+            }
 
             // Insert the connection ID and remote BDA into the profile table
             gl_profile_tab[PROFILE_A_APP_ID].conn_id = p_data->open.conn_id;
             memcpy(gl_profile_tab[PROFILE_A_APP_ID].remote_bda,
                    p_data->open.remote_bda, sizeof(esp_bd_addr_t));
-            ESP_LOGI(GATTC_TAG, "REMOTE BDA:");
-            esp_log_buffer_hex(GATTC_TAG, 
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "REMOTE BDA:");
+                esp_log_buffer_hex(GATTC_TAG, 
                                gl_profile_tab[PROFILE_A_APP_ID].remote_bda,
                                sizeof(esp_bd_addr_t));
+            }
             
             // Start the MTU request. We need to negotiate the MTU rate. For
             // the Stadia controller, we need to set the MTU to 23 since it uses 
@@ -123,7 +129,9 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
                 ESP_LOGE(GATTC_TAG, "config MTU error, error code = %x",
                          mtu_ret);
             }
-            ESP_LOGI(GATTC_TAG, "POST MTU request\n");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "POST MTU request\n");
+            }
             break;
 
         // MTU request event. Ensure success.
@@ -132,30 +140,34 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
                 ESP_LOGE(GATTC_TAG,"config mtu failed, error status = %x",
                          param->cfg_mtu.status);
             }
-            ESP_LOGI(GATTC_TAG,
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG,
                      "ESP_GATTC_CFG_MTU_EVT, Status %d, MTU %d, conn_id %d",
                      param->cfg_mtu.status, param->cfg_mtu.mtu,
                      param->cfg_mtu.conn_id);
+            }
             esp_ble_gattc_search_service(gattc_if, param->cfg_mtu.conn_id,
                                          &remote_filter_service_uuid);
             break;
         
         // Service search returned result. Store the service information found.
         case ESP_GATTC_SEARCH_RES_EVT: {
-            ESP_LOGI(GATTC_TAG, "SEARCH RES: conn_id = %x is primary service %d",
-                     p_data->search_res.conn_id, p_data->search_res.is_primary);
-            ESP_LOGI(GATTC_TAG,
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG,
+                         "SEARCH RES: conn_id = %x is primary service %d",
+                         p_data->search_res.conn_id,
+                         p_data->search_res.is_primary);
+                ESP_LOGI(GATTC_TAG,
                      "start handle %d end handle %d current handle value %d",
                      p_data->search_res.start_handle,
                      p_data->search_res.end_handle,
                      p_data->search_res.srvc_id.inst_id);
+            }
 
             // If this is the service we're looking for, store it in the profile
             if (p_data->search_res.srvc_id.uuid.len == ESP_UUID_LEN_16 &&
                 p_data->search_res.srvc_id.uuid.uuid.uuid16 == 
                 HID_SERVICE_UUID) {
-                ESP_LOGI(GATTC_TAG, "UUID16: %x",
-                         p_data->search_res.srvc_id.uuid.uuid.uuid16);
                 get_service = true;
                 gl_profile_tab[PROFILE_A_APP_ID].service_start_handle =
                                                 p_data->search_res.start_handle;
@@ -174,13 +186,19 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
             }
             if(p_data->search_cmpl.searched_service_source ==
                ESP_GATT_SERVICE_FROM_REMOTE_DEVICE) {
-                ESP_LOGI(GATTC_TAG,
-                         "Get service information from remote device");
+                if (GATTC_DEBUG) {
+                    ESP_LOGI(GATTC_TAG,
+                            "Get service information from remote device");
+                }
             } else if (p_data->search_cmpl.searched_service_source ==
                        ESP_GATT_SERVICE_FROM_NVS_FLASH) {
-                ESP_LOGI(GATTC_TAG, "Get service information from flash");
+                if (GATTC_DEBUG) {
+                    ESP_LOGI(GATTC_TAG, "Get service information from flash");
+                }
             } else {
-                ESP_LOGI(GATTC_TAG, "unknown service source");
+                if (GATTC_DEBUG) {
+                    ESP_LOGI(GATTC_TAG, "unknown service source");
+                }
             }
 
             // If we found the HID service, search for the HID report
@@ -327,7 +345,9 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
                          p_data->write.status);
                 break;
             }
-            ESP_LOGI(GATTC_TAG, "write descr success");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "write descr success");
+            }
             break;
 
         // Service change event. Log the remote device's address. Reload the
@@ -337,8 +357,10 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
         case ESP_GATTC_SRVC_CHG_EVT: {
             esp_bd_addr_t bda;
             memcpy(bda, p_data->srvc_chg.remote_bda, sizeof(esp_bd_addr_t));
-            ESP_LOGI(GATTC_TAG, "ESP_GATTC_SRVC_CHG_EVT, bd_addr:");
-            esp_log_buffer_hex(GATTC_TAG, bda, sizeof(esp_bd_addr_t));
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "ESP_GATTC_SRVC_CHG_EVT, bd_addr:");
+                esp_log_buffer_hex(GATTC_TAG, bda, sizeof(esp_bd_addr_t));
+            }
             // Log all of the available services after change
             esp_ble_gattc_search_service(gattc_if,
                                          gl_profile_tab[PROFILE_A_APP_ID].conn_id,
@@ -353,7 +375,9 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
                          p_data->write.status);
                 break;
             }
-            ESP_LOGI(GATTC_TAG, "Write char success ");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "Write char success ");
+            }
             break;
 
         // Disconnect event. Log the reason for the disconnection.

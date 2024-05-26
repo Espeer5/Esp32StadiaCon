@@ -162,7 +162,9 @@ void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
                          param->scan_start_cmpl.status);
                 break;
             }
-            ESP_LOGI(GATTC_TAG, "Scan start success");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "Scan start success");
+            }
             break;
 
         // Response to a request for a passkey to pair with a device. Stadia
@@ -173,7 +175,9 @@ void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
             // displayed on the remote device
             //esp_ble_passkey_reply(gl_profile_tab[PROFILE_A_APP_ID].remote_bda,
             //                       true, 0x00);
-            ESP_LOGI(GATTC_TAG, "ESP_GAP_BLE_PASSKEY_REQ_EVT");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "ESP_GAP_BLE_PASSKEY_REQ_EVT");
+            }
             break;
 
         // Response to a request for an out-of-band key to pair with a device.
@@ -181,7 +185,9 @@ void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
         // with a generic HID device this code is necessary. In OOB, both
         // devices need to use the same tk.
         case ESP_GAP_BLE_OOB_REQ_EVT: {
-            ESP_LOGI(GATTC_TAG, "ESP_GAP_BLE_OOB_REQ_EVT");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "ESP_GAP_BLE_OOB_REQ_EVT");
+            }
             uint8_t tk[16] = {1};
             esp_ble_oob_req_reply(param->ble_security.ble_req.bd_addr, tk,
                                   sizeof(tk));
@@ -190,10 +196,14 @@ void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
 
         // ER/IR events. Simply log the event for debugging purposes.
         case ESP_GAP_BLE_LOCAL_IR_EVT:
-            ESP_LOGI(GATTC_TAG, "ESP_GAP_BLE_LOCAL_IR_EVT");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "ESP_GAP_BLE_LOCAL_IR_EVT");
+            }
             break;
         case ESP_GAP_BLE_LOCAL_ER_EVT:
-            ESP_LOGI(GATTC_TAG, "ESP_GAP_BLE_LOCAL_ER_EVT");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "ESP_GAP_BLE_LOCAL_ER_EVT");
+            }
             break;
 
         // Respond to a security requirement from a discovered device.
@@ -210,9 +220,11 @@ void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
                with the number displayed by peer device. *Should not be used 
                for Google Stadia Controller.* */
             esp_ble_confirm_reply(param->ble_security.ble_req.bd_addr, true);
-            ESP_LOGI(GATTC_TAG,
-                     "ESP_GAP_BLE_NC_REQ_EVT, the passkey Notify number:%"
-                     PRIu32, param->ble_security.key_notif.passkey);
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG,
+                        "ESP_GAP_BLE_NC_REQ_EVT, the passkey Notify number:%"
+                        PRIu32, param->ble_security.key_notif.passkey);
+            }
             break;
 
         // A discovered device requires a passkey to pair and the peer device is
@@ -221,15 +233,19 @@ void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
         case ESP_GAP_BLE_PASSKEY_NOTIF_EVT:
             // show the passkey number to the user to input it in the peer
             // device.
-            ESP_LOGI(GATTC_TAG, "The passkey Notify number:%06" PRIu32,
-                     param->ble_security.key_notif.passkey);
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "The passkey Notify number:%06" PRIu32,
+                         param->ble_security.key_notif.passkey);
+            }
             break;
 
         // The reverse circumstance of the ESP_GAP_BLE_PASSKEY_NOTIF_EVT.
         case ESP_GAP_BLE_KEY_EVT:
             //shows the ble key info share with peer device to the user.
-            ESP_LOGI(GATTC_TAG, "key type = %s",
-                     esp_key_type_to_str(param->ble_security.ble_key.key_type));
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "key type = %s",
+                         esp_key_type_to_str(param->ble_security.ble_key.key_type));
+            }
             break;
 
         // Authentication has been completed. Report the pairing status and 
@@ -239,22 +255,24 @@ void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
             esp_bd_addr_t bd_addr;
             memcpy(bd_addr, param->ble_security.auth_cmpl.bd_addr,
                    sizeof(esp_bd_addr_t));
-            ESP_LOGI(GATTC_TAG, "remote BD_ADDR: %08x%04x",\
-                    (bd_addr[0] << 24) + (bd_addr[1] << 16) +
-                    (bd_addr[2] << 8) + bd_addr[3],
-                    (bd_addr[4] << 8) + bd_addr[5]);
-            ESP_LOGI(GATTC_TAG, "address type = %d",
-                     param->ble_security.auth_cmpl.addr_type);
-            ESP_LOGI(GATTC_TAG, "pair status = %s",
-                     param->ble_security.auth_cmpl.success ? "success"
-                     : "fail");
-            if (!param->ble_security.auth_cmpl.success) {
-                ESP_LOGI(GATTC_TAG, "fail reason = 0x%x",
-                         param->ble_security.auth_cmpl.fail_reason);
-            } else {
-                ESP_LOGI(GATTC_TAG, "auth mode = %s",
-                         esp_auth_req_to_str(param->ble_security.
-                                             auth_cmpl.auth_mode));
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "remote BD_ADDR: %08x%04x",\
+                        (bd_addr[0] << 24) + (bd_addr[1] << 16) +
+                        (bd_addr[2] << 8) + bd_addr[3],
+                        (bd_addr[4] << 8) + bd_addr[5]);
+                ESP_LOGI(GATTC_TAG, "address type = %d",
+                        param->ble_security.auth_cmpl.addr_type);
+                ESP_LOGI(GATTC_TAG, "pair status = %s",
+                        param->ble_security.auth_cmpl.success ? "success"
+                        : "fail");
+                if (!param->ble_security.auth_cmpl.success) {
+                    ESP_LOGI(GATTC_TAG, "fail reason = 0x%x",
+                            param->ble_security.auth_cmpl.fail_reason);
+                } else {
+                    ESP_LOGI(GATTC_TAG, "auth mode = %s",
+                            esp_auth_req_to_str(param->ble_security.
+                                                auth_cmpl.auth_mode));
+                }
             }
             break;
         }
@@ -265,29 +283,37 @@ void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
             // Dispatch on the type of scan result
             switch (scan_result->scan_rst.search_evt) {
                 case ESP_GAP_SEARCH_INQ_RES_EVT:
-                    esp_log_buffer_hex(GATTC_TAG, scan_result->scan_rst.bda, 6);
-                    ESP_LOGI(GATTC_TAG,
+                    if (GATTC_DEBUG) {
+                        esp_log_buffer_hex(GATTC_TAG, scan_result->scan_rst.bda, 6);
+                        ESP_LOGI(GATTC_TAG,
                             "Searched Adv Data Len %d, Scan Response Len %d",
                             scan_result->scan_rst.adv_data_len,
                             scan_result->scan_rst.scan_rsp_len);
+                    }
                     adv_name = esp_ble_resolve_adv_data(scan_result->
                                                         scan_rst.ble_adv,
                                                         ESP_BLE_AD_TYPE_NAME_CMPL,
                                                         &adv_name_len);
-                    ESP_LOGI(GATTC_TAG, "Searched Device Name Len %d",
-                             adv_name_len);
-                    esp_log_buffer_char(GATTC_TAG, adv_name, adv_name_len);
-                    ESP_LOGI(GATTC_TAG, "\n");
+                    if (GATTC_DEBUG) {
+                        ESP_LOGI(GATTC_TAG, "Searched Device Name Len %d",
+                                adv_name_len);
+                        esp_log_buffer_char(GATTC_TAG, adv_name, adv_name_len);
+                        ESP_LOGI(GATTC_TAG, "\n");
+                    }
                     if (adv_name != NULL) {
                         if (strlen(remote_device_name) == adv_name_len &&
                             strncmp((char *)adv_name, remote_device_name, 
                             adv_name_len) == 0) {
-                            ESP_LOGI(GATTC_TAG, "searched device %s\n",
+                            if (GATTC_DEBUG) {
+                                ESP_LOGI(GATTC_TAG, "searched device %s\n",
                                     remote_device_name);
+                            }
                             if (connect == false) {
                                 connect = true;
-                                ESP_LOGI(GATTC_TAG,
+                                if (GATTC_DEBUG) {
+                                    ESP_LOGI(GATTC_TAG,
                                         "connect to the remote device.");
+                                }
                                 esp_ble_gap_stop_scanning();
                                 esp_ble_gattc_open(gl_profile_tab[PROFILE_A_APP_ID].
                                                 gattc_if,
@@ -314,7 +340,9 @@ void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param) {
                          param->scan_stop_cmpl.status);
                 break;
             }
-            ESP_LOGI(GATTC_TAG, "Stop scan successfully");
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "Stop scan successfully");
+            }
             break;
 
         default:
