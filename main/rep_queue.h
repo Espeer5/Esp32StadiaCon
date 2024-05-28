@@ -16,6 +16,11 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/semphr.h"
+
+// Load in the global counting sempahore for the report queue
+extern SemaphoreHandle_t repSem;
 
 /**
  * STADIA HID REPORT STRUCTURE
@@ -30,7 +35,9 @@
  *  - Byte 7: 8 bits pointer Rz on stick
  *  - Byte 8: 8 bits of Brake trigger
  *  - Byte 9: 8 bits of Throttle trigger
- *  - Byte 10: 3 bits for volume, play/pause, 5 bits of padding
+ *  - Byte 10: 3 bits for volume, play/pause, 5 bits of padding. (Used when a
+ *             headset is connected directly to the controller. Not used in this
+ *             project.)
 */
 
 typedef struct StadiaRep {

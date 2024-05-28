@@ -91,6 +91,7 @@ void insert_stadia_rep(RepQueue_t *queue, StadiaRep_t *rep) {
     }
     queue->size++;
     xSemaphoreGive(repQueueMutex);
+    xSemaphoreGive(repSem);
 }
 
 StadiaRep_t *dequeue_stadia_rep(RepQueue_t *queue) {

@@ -332,11 +332,12 @@ void gattc_profile_event_handler(esp_gattc_cb_event_t event,
         }
 
         // Notification received from the HID report characteristic.
-        // TODO: Parse the notification data
         case ESP_GATTC_NOTIFY_EVT:
-            ESP_LOGI(GATTC_TAG, "ESP_GATTC_NOTIFY_EVT, receive notify value:");
-            esp_log_buffer_hex(GATTC_TAG, p_data->notify.value,
-                               p_data->notify.value_len);
+            if (GATTC_DEBUG) {
+                ESP_LOGI(GATTC_TAG, "ESP_GATTC_NOTIFY_EVT, receive notify value:");
+                esp_log_buffer_hex(GATTC_TAG, p_data->notify.value,
+                                   p_data->notify.value_len);
+            }
             StadiaRep_t *rep = load_stadia_rep(p_data->notify.value,
                                                p_data->notify.value_len);
             if (rep != NULL) {
