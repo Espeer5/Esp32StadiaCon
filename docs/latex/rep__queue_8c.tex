@@ -1,0 +1,152 @@
+\doxysection{main/rep\+\_\+queue.c File Reference}
+\hypertarget{rep__queue_8c}{}\label{rep__queue_8c}\index{main/rep\_queue.c@{main/rep\_queue.c}}
+
+
+Method implementations for the \doxylink{struct_rep_queue}{Rep\+Queue} class.  
+
+
+{\ttfamily \#include "{}rep\+\_\+queue.\+h"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}free\+RTOS/\+Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}free\+RTOS/semphr.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{rep__queue_8h_a18a642d8c9a7dbb0ed7d84cce772d4cf}{Stadia\+Rep\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{rep__queue_8c_aa43ad734baa023e2dad4b318b287739a}{load\+\_\+stadia\+\_\+rep}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Load a \doxylink{struct_stadia_rep}{Stadia\+Rep} from a buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{rep__queue_8c_a1af0a99c27ef0d1a058aa9d3e4ad8438}{print\+\_\+stadia\+\_\+rep}} (\mbox{\hyperlink{rep__queue_8h_a18a642d8c9a7dbb0ed7d84cce772d4cf}{Stadia\+Rep\+\_\+t}} \texorpdfstring{$\ast$}{*}rep)
+\begin{DoxyCompactList}\small\item\em Print a \doxylink{struct_stadia_rep}{Stadia\+Rep} to the console for debugging. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_rep_queue}{Rep\+Queue\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{rep__queue_8c_a23bd134501d0b4c70695bf5dcd5f6082}{create\+\_\+stadia\+\_\+rep\+\_\+queue}} ()
+\begin{DoxyCompactList}\small\item\em Create a new Stadia\+Queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{rep__queue_8c_ab32f4cc18f31ae93b7e7b46e6d086cd9}{insert\+\_\+stadia\+\_\+rep}} (\mbox{\hyperlink{struct_rep_queue}{Rep\+Queue\+\_\+t}} \texorpdfstring{$\ast$}{*}queue, \mbox{\hyperlink{rep__queue_8h_a18a642d8c9a7dbb0ed7d84cce772d4cf}{Stadia\+Rep\+\_\+t}} \texorpdfstring{$\ast$}{*}rep)
+\begin{DoxyCompactList}\small\item\em Insert a \doxylink{struct_stadia_rep}{Stadia\+Rep} into the queue. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{rep__queue_8h_a18a642d8c9a7dbb0ed7d84cce772d4cf}{Stadia\+Rep\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{rep__queue_8c_ae1b36bea84513c8fe1acf8ff2561f2cc}{dequeue\+\_\+stadia\+\_\+rep}} (\mbox{\hyperlink{struct_rep_queue}{Rep\+Queue\+\_\+t}} \texorpdfstring{$\ast$}{*}queue)
+\begin{DoxyCompactList}\small\item\em Dequeue a \doxylink{struct_stadia_rep}{Stadia\+Rep} from the queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{rep__queue_8c_a7264b549138407cb602e73d341d0d9cc}{print\+\_\+rep\+\_\+queue}} (\mbox{\hyperlink{struct_rep_queue}{Rep\+Queue\+\_\+t}} \texorpdfstring{$\ast$}{*}queue)
+\begin{DoxyCompactList}\small\item\em Print a \doxylink{struct_rep_queue}{Rep\+Queue} to the console for debugging. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{rep__queue_8c_a400ac109c2b80d5ac8859ee70764892c}\label{rep__queue_8c_a400ac109c2b80d5ac8859ee70764892c} 
+Semaphore\+Handle\+\_\+t {\bfseries rep\+Queue\+Mutex}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Method implementations for the \doxylink{struct_rep_queue}{Rep\+Queue} class. 
+
+A \doxylink{struct_rep_queue}{Rep\+Queue} is a queue of reports that are received from the Google Stadia Controller. The queue is used to store reports until they can be processed and sent out on UART.
+
+\begin{DoxyVersion}{Version}
+V1.\+0 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Edward Speer 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+05/26/24 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{rep__queue_8c_a23bd134501d0b4c70695bf5dcd5f6082}\index{rep\_queue.c@{rep\_queue.c}!create\_stadia\_rep\_queue@{create\_stadia\_rep\_queue}}
+\index{create\_stadia\_rep\_queue@{create\_stadia\_rep\_queue}!rep\_queue.c@{rep\_queue.c}}
+\doxysubsubsection{\texorpdfstring{create\_stadia\_rep\_queue()}{create\_stadia\_rep\_queue()}}
+{\footnotesize\ttfamily \label{rep__queue_8c_a23bd134501d0b4c70695bf5dcd5f6082} 
+\mbox{\hyperlink{struct_rep_queue}{Rep\+Queue\+\_\+t}} \texorpdfstring{$\ast$}{*} create\+\_\+stadia\+\_\+rep\+\_\+queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Create a new Stadia\+Queue. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new Stadia\+Queue. 
+\end{DoxyReturn}
+\Hypertarget{rep__queue_8c_ae1b36bea84513c8fe1acf8ff2561f2cc}\index{rep\_queue.c@{rep\_queue.c}!dequeue\_stadia\_rep@{dequeue\_stadia\_rep}}
+\index{dequeue\_stadia\_rep@{dequeue\_stadia\_rep}!rep\_queue.c@{rep\_queue.c}}
+\doxysubsubsection{\texorpdfstring{dequeue\_stadia\_rep()}{dequeue\_stadia\_rep()}}
+{\footnotesize\ttfamily \label{rep__queue_8c_ae1b36bea84513c8fe1acf8ff2561f2cc} 
+\mbox{\hyperlink{rep__queue_8h_a18a642d8c9a7dbb0ed7d84cce772d4cf}{Stadia\+Rep\+\_\+t}} \texorpdfstring{$\ast$}{*} dequeue\+\_\+stadia\+\_\+rep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_rep_queue}{Rep\+Queue\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{queue}{}\end{DoxyParamCaption})}
+
+
+
+Dequeue a \doxylink{struct_stadia_rep}{Stadia\+Rep} from the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue} & The queue to remove from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the \doxylink{struct_stadia_rep}{Stadia\+Rep} that was removed. 
+\end{DoxyReturn}
+\Hypertarget{rep__queue_8c_ab32f4cc18f31ae93b7e7b46e6d086cd9}\index{rep\_queue.c@{rep\_queue.c}!insert\_stadia\_rep@{insert\_stadia\_rep}}
+\index{insert\_stadia\_rep@{insert\_stadia\_rep}!rep\_queue.c@{rep\_queue.c}}
+\doxysubsubsection{\texorpdfstring{insert\_stadia\_rep()}{insert\_stadia\_rep()}}
+{\footnotesize\ttfamily \label{rep__queue_8c_ab32f4cc18f31ae93b7e7b46e6d086cd9} 
+void insert\+\_\+stadia\+\_\+rep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_rep_queue}{Rep\+Queue\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{queue}{, }\item[{\mbox{\hyperlink{rep__queue_8h_a18a642d8c9a7dbb0ed7d84cce772d4cf}{Stadia\+Rep\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{rep}{}\end{DoxyParamCaption})}
+
+
+
+Insert a \doxylink{struct_stadia_rep}{Stadia\+Rep} into the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue} & The queue to insert into. \\
+\hline
+{\em rep} & The \doxylink{struct_stadia_rep}{Stadia\+Rep} to insert. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{rep__queue_8c_aa43ad734baa023e2dad4b318b287739a}\index{rep\_queue.c@{rep\_queue.c}!load\_stadia\_rep@{load\_stadia\_rep}}
+\index{load\_stadia\_rep@{load\_stadia\_rep}!rep\_queue.c@{rep\_queue.c}}
+\doxysubsubsection{\texorpdfstring{load\_stadia\_rep()}{load\_stadia\_rep()}}
+{\footnotesize\ttfamily \label{rep__queue_8c_aa43ad734baa023e2dad4b318b287739a} 
+\mbox{\hyperlink{rep__queue_8h_a18a642d8c9a7dbb0ed7d84cce772d4cf}{Stadia\+Rep\+\_\+t}} \texorpdfstring{$\ast$}{*} load\+\_\+stadia\+\_\+rep (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Load a \doxylink{struct_stadia_rep}{Stadia\+Rep} from a buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rep} & The \doxylink{struct_stadia_rep}{Stadia\+Rep} to load into. \\
+\hline
+{\em buffer} & The buffer to load from. \\
+\hline
+{\em len} & The length of the buffer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the \doxylink{struct_stadia_rep}{Stadia\+Rep} if successful, NULL otherwise. 
+\end{DoxyReturn}
+\Hypertarget{rep__queue_8c_a7264b549138407cb602e73d341d0d9cc}\index{rep\_queue.c@{rep\_queue.c}!print\_rep\_queue@{print\_rep\_queue}}
+\index{print\_rep\_queue@{print\_rep\_queue}!rep\_queue.c@{rep\_queue.c}}
+\doxysubsubsection{\texorpdfstring{print\_rep\_queue()}{print\_rep\_queue()}}
+{\footnotesize\ttfamily \label{rep__queue_8c_a7264b549138407cb602e73d341d0d9cc} 
+void print\+\_\+rep\+\_\+queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_rep_queue}{Rep\+Queue\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{queue}{}\end{DoxyParamCaption})}
+
+
+
+Print a \doxylink{struct_rep_queue}{Rep\+Queue} to the console for debugging. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue} & The \doxylink{struct_rep_queue}{Rep\+Queue} to print. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{rep__queue_8c_a1af0a99c27ef0d1a058aa9d3e4ad8438}\index{rep\_queue.c@{rep\_queue.c}!print\_stadia\_rep@{print\_stadia\_rep}}
+\index{print\_stadia\_rep@{print\_stadia\_rep}!rep\_queue.c@{rep\_queue.c}}
+\doxysubsubsection{\texorpdfstring{print\_stadia\_rep()}{print\_stadia\_rep()}}
+{\footnotesize\ttfamily \label{rep__queue_8c_a1af0a99c27ef0d1a058aa9d3e4ad8438} 
+void print\+\_\+stadia\+\_\+rep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{rep__queue_8h_a18a642d8c9a7dbb0ed7d84cce772d4cf}{Stadia\+Rep\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{rep}{}\end{DoxyParamCaption})}
+
+
+
+Print a \doxylink{struct_stadia_rep}{Stadia\+Rep} to the console for debugging. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rep} & A pointer to the \doxylink{struct_stadia_rep}{Stadia\+Rep} to print. \\
+\hline
+\end{DoxyParams}

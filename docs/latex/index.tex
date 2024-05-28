@@ -1,0 +1,11 @@
+\chapter{Stadia\+Con}
+\hypertarget{index}{}\label{index}\index{StadiaCon@{StadiaCon}}
+\label{index_md__r_e_a_d_m_e}%
+\Hypertarget{index_md__r_e_a_d_m_e}%
+ This package uses the esp32 Bluedroid stack to connect esp32\+C6 development board to a Google Stadia controller with the generic ble firmware installed on it.\hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Structure}{Structure}}\label{index_autotoc_md1}
+The ble utility functions are organized into modules\+:
+\begin{DoxyItemize}
+\item auth\+\_\+gap\+: Sets up low-\/level GAP profile for connecting to the Google Stadia controller using proper security and authentication
+\item \doxylink{gattc_8c}{gattc.\+c}\+: Sets up a GATT client profile which establishes notification on and reads HID reports from the Stadia controller
+\item bt\+\_\+init\+: Methods used to fully intialize the bluetooth hardware, bluetooth stack, GATT and GAP profiles, and ble authentication 
+\end{DoxyItemize}

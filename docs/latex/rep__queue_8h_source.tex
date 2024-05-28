@@ -1,0 +1,64 @@
+\doxysection{rep\+\_\+queue.\+h}
+\hypertarget{rep__queue_8h_source}{}\label{rep__queue_8h_source}\index{main/rep\_queue.h@{main/rep\_queue.h}}
+\mbox{\hyperlink{rep__queue_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ \_REP\_QUEUE\_H\_}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ \_REP\_QUEUE\_H\_}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}freertos/FreeRTOS.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}freertos/semphr.h"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ Load\ in\ the\ global\ counting\ sempahore\ for\ the\ report\ queue}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{extern}\ SemaphoreHandle\_t\ repSem;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_stadia_rep}{StadiaRep}}\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ uint8\_t\ dpad;}
+\DoxyCodeLine{00045\ \ \ \ \ uint8\_t\ buttons1;}
+\DoxyCodeLine{00046\ \ \ \ \ uint8\_t\ buttons2;}
+\DoxyCodeLine{00047\ \ \ \ \ uint8\_t\ stickX;}
+\DoxyCodeLine{00048\ \ \ \ \ uint8\_t\ stickY;}
+\DoxyCodeLine{00049\ \ \ \ \ uint8\_t\ stickZ;}
+\DoxyCodeLine{00050\ \ \ \ \ uint8\_t\ stickRz;}
+\DoxyCodeLine{00051\ \ \ \ \ uint8\_t\ brake;}
+\DoxyCodeLine{00052\ \ \ \ \ uint8\_t\ throttle;}
+\DoxyCodeLine{00053\ \ \ \ \ uint8\_t\ volume;}
+\DoxyCodeLine{00054\ \}\ \mbox{\hyperlink{rep__queue_8h_a18a642d8c9a7dbb0ed7d84cce772d4cf}{StadiaRep\_t}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00064\ \mbox{\hyperlink{struct_stadia_rep}{StadiaRep\_t}}\ *\mbox{\hyperlink{rep__queue_8h_aa43ad734baa023e2dad4b318b287739a}{load\_stadia\_rep}}(uint8\_t*\ buffer,\ \textcolor{keywordtype}{size\_t}\ len);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{rep__queue_8h_a1af0a99c27ef0d1a058aa9d3e4ad8438}{print\_stadia\_rep}}(\mbox{\hyperlink{struct_stadia_rep}{StadiaRep\_t}}*\ rep);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_rep_queue_element}{RepQueueElement}}\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{struct_stadia_rep}{StadiaRep\_t}}\ *rep;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_rep_queue_element}{RepQueueElement}}\ *next;}
+\DoxyCodeLine{00082\ \}\ \mbox{\hyperlink{rep__queue_8h_a21ccb8a7f8e6e52f38b72c9f19234e3d}{RepQueueElement\_t}};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ *\ @brief\ A\ queue\ of\ Stadia\ reports.}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ *\ This\ struct\ is\ used\ to\ store\ a\ queue\ of\ Stadia\ reports.\ The\ queue\ is\ a\ }}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ *\ singly\ linked\ list\ of\ StadiaQueueElements.}}
+\DoxyCodeLine{00089\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00090\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_rep_queue}{RepQueue}}\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{struct_rep_queue_element}{RepQueueElement\_t}}\ *head;}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{struct_rep_queue_element}{RepQueueElement\_t}}\ *tail;}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size;}
+\DoxyCodeLine{00094\ \}\ \mbox{\hyperlink{struct_rep_queue}{RepQueue\_t}};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ The\ global\ report\ queue}}
+\DoxyCodeLine{00097\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{struct_rep_queue}{RepQueue\_t}}\ *repQueue;}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00104\ \mbox{\hyperlink{struct_rep_queue}{RepQueue\_t}}\ *\mbox{\hyperlink{rep__queue_8h_a23bd134501d0b4c70695bf5dcd5f6082}{create\_stadia\_rep\_queue}}();}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00112\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{rep__queue_8h_ab32f4cc18f31ae93b7e7b46e6d086cd9}{insert\_stadia\_rep}}(\mbox{\hyperlink{struct_rep_queue}{RepQueue\_t}}\ *queue,\ \mbox{\hyperlink{struct_stadia_rep}{StadiaRep\_t}}\ *rep);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00120\ \mbox{\hyperlink{struct_stadia_rep}{StadiaRep\_t}}\ *\mbox{\hyperlink{rep__queue_8h_ae1b36bea84513c8fe1acf8ff2561f2cc}{dequeue\_stadia\_rep}}(\mbox{\hyperlink{struct_rep_queue}{RepQueue\_t}}\ *queue);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00127\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{rep__queue_8h_a7264b549138407cb602e73d341d0d9cc}{print\_rep\_queue}}(\mbox{\hyperlink{struct_rep_queue}{RepQueue\_t}}\ *queue);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#ifndef\ \_REP\_QUEUE\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

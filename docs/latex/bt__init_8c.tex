@@ -1,0 +1,134 @@
+\doxysection{main/bt\+\_\+init.c File Reference}
+\hypertarget{bt__init_8c}{}\label{bt__init_8c}\index{main/bt\_init.c@{main/bt\_init.c}}
+
+
+Definitions and setup method implementations for initializing the ESP32\+C6 as a Bluetooth device and setting up the GAP and GATT client profiles.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include "{}esp\+\_\+bt.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+gap\+\_\+ble\+\_\+api.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+gattc\+\_\+api.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+gatt\+\_\+defs.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+bt\+\_\+main.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+gatt\+\_\+common\+\_\+api.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include "{}freertos/\+Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}bt\+\_\+init.\+h"{}}\newline
+{\ttfamily \#include "{}auth\+\_\+gap.\+h"{}}\newline
+{\ttfamily \#include "{}gattc.\+h"{}}\newline
+{\ttfamily \#include "{}globalconst.\+c"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{bt__init_8c_aaeeb637fe15bdab5c8e295fb17efdced}{bt\+\_\+nvs\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize NVM storage for the Bluetooth controller. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bt__init_8c_ad94053c8859492a66f28eab6986ef5c1}{bt\+\_\+controller\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the Bluetooth controller. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bt__init_8c_afa0209f7ba8fd99682535ec5bda128e9}{bt\+\_\+stack\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the Bluetooth stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bt__init_8c_ae11bd41d6f1ff7d9d5900a6294bedd19}{bt\+\_\+mtu\+\_\+set}} (void)
+\begin{DoxyCompactList}\small\item\em Set the MTU size for the Bluetooth controller. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bt__init_8c_a96a1817a2c8bc6420bfda85979c56b4c}{gap\+\_\+profile\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the GAP profile. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bt__init_8c_a9638b14c32d51025d1091a13abbff0b0}{gattc\+\_\+profile\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the GATT client profile. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Definitions and setup method implementations for initializing the ESP32\+C6 as a Bluetooth device and setting up the GAP and GATT client profiles. 
+
+\begin{DoxyVersion}{Version}
+V1.\+0 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Edward Speer 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+05/25/24 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{bt__init_8c_ad94053c8859492a66f28eab6986ef5c1}\index{bt\_init.c@{bt\_init.c}!bt\_controller\_init@{bt\_controller\_init}}
+\index{bt\_controller\_init@{bt\_controller\_init}!bt\_init.c@{bt\_init.c}}
+\doxysubsubsection{\texorpdfstring{bt\_controller\_init()}{bt\_controller\_init()}}
+{\footnotesize\ttfamily \label{bt__init_8c_ad94053c8859492a66f28eab6986ef5c1} 
+void bt\+\_\+controller\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the Bluetooth controller. 
+
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 if failed 
+\end{DoxyReturn}
+\Hypertarget{bt__init_8c_ae11bd41d6f1ff7d9d5900a6294bedd19}\index{bt\_init.c@{bt\_init.c}!bt\_mtu\_set@{bt\_mtu\_set}}
+\index{bt\_mtu\_set@{bt\_mtu\_set}!bt\_init.c@{bt\_init.c}}
+\doxysubsubsection{\texorpdfstring{bt\_mtu\_set()}{bt\_mtu\_set()}}
+{\footnotesize\ttfamily \label{bt__init_8c_ae11bd41d6f1ff7d9d5900a6294bedd19} 
+void bt\+\_\+mtu\+\_\+set (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Set the MTU size for the Bluetooth controller. 
+
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 if failed 
+\end{DoxyReturn}
+\Hypertarget{bt__init_8c_aaeeb637fe15bdab5c8e295fb17efdced}\index{bt\_init.c@{bt\_init.c}!bt\_nvs\_init@{bt\_nvs\_init}}
+\index{bt\_nvs\_init@{bt\_nvs\_init}!bt\_init.c@{bt\_init.c}}
+\doxysubsubsection{\texorpdfstring{bt\_nvs\_init()}{bt\_nvs\_init()}}
+{\footnotesize\ttfamily \label{bt__init_8c_aaeeb637fe15bdab5c8e295fb17efdced} 
+void bt\+\_\+nvs\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize NVM storage for the Bluetooth controller. 
+
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 if failed 
+\end{DoxyReturn}
+\Hypertarget{bt__init_8c_afa0209f7ba8fd99682535ec5bda128e9}\index{bt\_init.c@{bt\_init.c}!bt\_stack\_init@{bt\_stack\_init}}
+\index{bt\_stack\_init@{bt\_stack\_init}!bt\_init.c@{bt\_init.c}}
+\doxysubsubsection{\texorpdfstring{bt\_stack\_init()}{bt\_stack\_init()}}
+{\footnotesize\ttfamily \label{bt__init_8c_afa0209f7ba8fd99682535ec5bda128e9} 
+void bt\+\_\+stack\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the Bluetooth stack. 
+
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 if failed 
+\end{DoxyReturn}
+\Hypertarget{bt__init_8c_a96a1817a2c8bc6420bfda85979c56b4c}\index{bt\_init.c@{bt\_init.c}!gap\_profile\_init@{gap\_profile\_init}}
+\index{gap\_profile\_init@{gap\_profile\_init}!bt\_init.c@{bt\_init.c}}
+\doxysubsubsection{\texorpdfstring{gap\_profile\_init()}{gap\_profile\_init()}}
+{\footnotesize\ttfamily \label{bt__init_8c_a96a1817a2c8bc6420bfda85979c56b4c} 
+void gap\+\_\+profile\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the GAP profile. 
+
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 if failed 
+\end{DoxyReturn}
+\Hypertarget{bt__init_8c_a9638b14c32d51025d1091a13abbff0b0}\index{bt\_init.c@{bt\_init.c}!gattc\_profile\_init@{gattc\_profile\_init}}
+\index{gattc\_profile\_init@{gattc\_profile\_init}!bt\_init.c@{bt\_init.c}}
+\doxysubsubsection{\texorpdfstring{gattc\_profile\_init()}{gattc\_profile\_init()}}
+{\footnotesize\ttfamily \label{bt__init_8c_a9638b14c32d51025d1091a13abbff0b0} 
+void gattc\+\_\+profile\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the GATT client profile. 
+
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 if failed 
+\end{DoxyReturn}

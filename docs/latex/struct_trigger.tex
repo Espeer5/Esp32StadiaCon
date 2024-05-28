@@ -1,0 +1,30 @@
+\doxysection{Trigger Struct Reference}
+\hypertarget{struct_trigger}{}\label{struct_trigger}\index{Trigger@{Trigger}}
+
+
+Represents a trigger on the controller.  
+
+
+
+
+{\ttfamily \#include $<$con\+\_\+state.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_trigger_af7aa835b0dea64d43ed41e4669819003}\label{struct_trigger_af7aa835b0dea64d43ed41e4669819003} 
+char {\bfseries id} \mbox{[}3\mbox{]}
+\item 
+\Hypertarget{struct_trigger_a1bd4e60788dcc9f0baa5a8c24e5328f1}\label{struct_trigger_a1bd4e60788dcc9f0baa5a8c24e5328f1} 
+float {\bfseries val}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a trigger on the controller. 
+
+This struct is used to represent a trigger on the controller. It contains a value to represent the position of the trigger. Since we want to output trigger positions as ASCII, we store the trigger value as a percentage of the maximum value. For example, a trigger pressed all the way down would be 100\%. Each trigger also has a unique string identifier of length 2 to represent the trigger in ASCII. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+main/\mbox{\hyperlink{con__state_8h}{con\+\_\+state.\+h}}\end{DoxyCompactItemize}

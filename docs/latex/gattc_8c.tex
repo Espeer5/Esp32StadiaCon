@@ -1,0 +1,97 @@
+\doxysection{main/gattc.c File Reference}
+\hypertarget{gattc_8c}{}\label{gattc_8c}\index{main/gattc.c@{main/gattc.c}}
+
+
+Implementation of the GATT client for the ESP32\+C6 to connect to a Google Stadia Controller over BLE.  
+
+
+{\ttfamily \#include "{}rep\+\_\+queue.\+h"{}}\newline
+{\ttfamily \#include "{}gattc.\+h"{}}\newline
+{\ttfamily \#include "{}auth\+\_\+gap.\+h"{}}\newline
+{\ttfamily \#include "{}globalconst.\+c"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{gattc_8c_a6bedb180bae32d77457eca11086b6142}\label{gattc_8c_a6bedb180bae32d77457eca11086b6142} 
+\#define {\bfseries INVALID\+\_\+\+HANDLE}~0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{gattc_8c_a920db2a960f43ed37aafc141b7fcbf0f}{esp\+\_\+gattc\+\_\+cb}} (esp\+\_\+gattc\+\_\+cb\+\_\+event\+\_\+t event, esp\+\_\+gatt\+\_\+if\+\_\+t gattc\+\_\+if, esp\+\_\+ble\+\_\+gattc\+\_\+cb\+\_\+param\+\_\+t \texorpdfstring{$\ast$}{*}param)
+\begin{DoxyCompactList}\small\item\em Callback function for the GATT client to handle events from the ESP32\+C6 BLE stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gattc_8c_a8e405db179e94156ba6915f2ff377ffb}{gattc\+\_\+profile\+\_\+event\+\_\+handler}} (esp\+\_\+gattc\+\_\+cb\+\_\+event\+\_\+t event, esp\+\_\+gatt\+\_\+if\+\_\+t gattc\+\_\+if, esp\+\_\+ble\+\_\+gattc\+\_\+cb\+\_\+param\+\_\+t \texorpdfstring{$\ast$}{*}param)
+\begin{DoxyCompactList}\small\item\em Callback function for the GATT profile to handle events triggered by the remote device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{gattc_8c_af4e68d5926444b7651a9095ee0b26e48}\label{gattc_8c_af4e68d5926444b7651a9095ee0b26e48} 
+bool {\bfseries connect}
+\item 
+struct \mbox{\hyperlink{structgattc__profile__inst}{gattc\+\_\+profile\+\_\+inst}} \mbox{\hyperlink{gattc_8c_adac7a2e86e3f9457bcc6fb55a9b316e0}{gl\+\_\+profile\+\_\+tab}} \mbox{[}PROFILE\+\_\+\+NUM\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the GATT client for the ESP32\+C6 to connect to a Google Stadia Controller over BLE. 
+
+\begin{DoxyVersion}{Version}
+V1.\+0 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Edward Speer 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+05/25/24
+\end{DoxyDate}
+Much of this code is based on the ESP-\/\+IDF GATT client example code, which can be found at \href{https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_security_client}{\texttt{ https\+://github.\+com/espressif/esp-\/idf/tree/master/examples/bluetooth/bluedroid/ble/gatt\+\_\+security\+\_\+client}} 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{gattc_8c_a920db2a960f43ed37aafc141b7fcbf0f}\index{gattc.c@{gattc.c}!esp\_gattc\_cb@{esp\_gattc\_cb}}
+\index{esp\_gattc\_cb@{esp\_gattc\_cb}!gattc.c@{gattc.c}}
+\doxysubsubsection{\texorpdfstring{esp\_gattc\_cb()}{esp\_gattc\_cb()}}
+{\footnotesize\ttfamily \label{gattc_8c_a920db2a960f43ed37aafc141b7fcbf0f} 
+void esp\+\_\+gattc\+\_\+cb (\begin{DoxyParamCaption}\item[{esp\+\_\+gattc\+\_\+cb\+\_\+event\+\_\+t}]{event}{, }\item[{esp\+\_\+gatt\+\_\+if\+\_\+t}]{gattc\+\_\+if}{, }\item[{esp\+\_\+ble\+\_\+gattc\+\_\+cb\+\_\+param\+\_\+t \texorpdfstring{$\ast$}{*}}]{param}{}\end{DoxyParamCaption})}
+
+
+
+Callback function for the GATT client to handle events from the ESP32\+C6 BLE stack. 
+
+Callback functions for the GATT client to handle events from the ESP32\+C6 \Hypertarget{gattc_8c_a8e405db179e94156ba6915f2ff377ffb}\index{gattc.c@{gattc.c}!gattc\_profile\_event\_handler@{gattc\_profile\_event\_handler}}
+\index{gattc\_profile\_event\_handler@{gattc\_profile\_event\_handler}!gattc.c@{gattc.c}}
+\doxysubsubsection{\texorpdfstring{gattc\_profile\_event\_handler()}{gattc\_profile\_event\_handler()}}
+{\footnotesize\ttfamily \label{gattc_8c_a8e405db179e94156ba6915f2ff377ffb} 
+void gattc\+\_\+profile\+\_\+event\+\_\+handler (\begin{DoxyParamCaption}\item[{esp\+\_\+gattc\+\_\+cb\+\_\+event\+\_\+t}]{event}{, }\item[{esp\+\_\+gatt\+\_\+if\+\_\+t}]{gattc\+\_\+if}{, }\item[{esp\+\_\+ble\+\_\+gattc\+\_\+cb\+\_\+param\+\_\+t \texorpdfstring{$\ast$}{*}}]{param}{}\end{DoxyParamCaption})}
+
+
+
+Callback function for the GATT profile to handle events triggered by the remote device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & The event that was triggered by the BLE stack. \\
+\hline
+{\em gatts\+\_\+if} & The interface that the event was triggered on. \\
+\hline
+{\em param} & The parameters for the event. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{gattc_8c_adac7a2e86e3f9457bcc6fb55a9b316e0}\index{gattc.c@{gattc.c}!gl\_profile\_tab@{gl\_profile\_tab}}
+\index{gl\_profile\_tab@{gl\_profile\_tab}!gattc.c@{gattc.c}}
+\doxysubsubsection{\texorpdfstring{gl\_profile\_tab}{gl\_profile\_tab}}
+{\footnotesize\ttfamily \label{gattc_8c_adac7a2e86e3f9457bcc6fb55a9b316e0} 
+struct \mbox{\hyperlink{structgattc__profile__inst}{gattc\+\_\+profile\+\_\+inst}} gl\+\_\+profile\+\_\+tab\mbox{[}PROFILE\+\_\+\+NUM\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ [PROFILE\_A\_APP\_ID]\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .gattc\_cb\ =\ \mbox{\hyperlink{gattc_8c_a8e405db179e94156ba6915f2ff377ffb}{gattc\_profile\_event\_handler}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ .gattc\_if\ =\ ESP\_GATT\_IF\_NONE,}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

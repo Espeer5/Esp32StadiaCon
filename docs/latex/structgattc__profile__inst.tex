@@ -1,0 +1,46 @@
+\doxysection{gattc\+\_\+profile\+\_\+inst Struct Reference}
+\hypertarget{structgattc__profile__inst}{}\label{structgattc__profile__inst}\index{gattc\_profile\_inst@{gattc\_profile\_inst}}
+
+
+The profile instance for the GATT client to connect to the Google Stadia Controller. Each profile instance contains a profile callback, as well as the handles for the service and characteristics to notify the ESP32\+C6 of changes in the controller\textquotesingle{}s state.  
+
+
+
+
+{\ttfamily \#include $<$gattc.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structgattc__profile__inst_a80b82715bcfef2625029afd0867029dd}\label{structgattc__profile__inst_a80b82715bcfef2625029afd0867029dd} 
+esp\+\_\+gattc\+\_\+cb\+\_\+t {\bfseries gattc\+\_\+cb}
+\item 
+\Hypertarget{structgattc__profile__inst_a3998301eaba4aaefd67be13842f035dd}\label{structgattc__profile__inst_a3998301eaba4aaefd67be13842f035dd} 
+uint16\+\_\+t {\bfseries gattc\+\_\+if}
+\item 
+\Hypertarget{structgattc__profile__inst_a2b237481452bc0c40975ae99b417229f}\label{structgattc__profile__inst_a2b237481452bc0c40975ae99b417229f} 
+uint16\+\_\+t {\bfseries app\+\_\+id}
+\item 
+\Hypertarget{structgattc__profile__inst_a2463ec9007987368f8cb8215d29eb781}\label{structgattc__profile__inst_a2463ec9007987368f8cb8215d29eb781} 
+uint16\+\_\+t {\bfseries conn\+\_\+id}
+\item 
+\Hypertarget{structgattc__profile__inst_a62fe6c2cb549ce5ea1192c9f649880a9}\label{structgattc__profile__inst_a62fe6c2cb549ce5ea1192c9f649880a9} 
+uint16\+\_\+t {\bfseries service\+\_\+start\+\_\+handle}
+\item 
+\Hypertarget{structgattc__profile__inst_ad53cb1635b7f4f77621e0b445f4f572c}\label{structgattc__profile__inst_ad53cb1635b7f4f77621e0b445f4f572c} 
+uint16\+\_\+t {\bfseries service\+\_\+end\+\_\+handle}
+\item 
+\Hypertarget{structgattc__profile__inst_a765130f961c8d0d7236ae73c00b92e2a}\label{structgattc__profile__inst_a765130f961c8d0d7236ae73c00b92e2a} 
+uint16\+\_\+t {\bfseries notify\+\_\+char\+\_\+handle}
+\item 
+\Hypertarget{structgattc__profile__inst_a6cb2caa11009e56126c1453de2ffe7fb}\label{structgattc__profile__inst_a6cb2caa11009e56126c1453de2ffe7fb} 
+esp\+\_\+bd\+\_\+addr\+\_\+t {\bfseries remote\+\_\+bda}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The profile instance for the GATT client to connect to the Google Stadia Controller. Each profile instance contains a profile callback, as well as the handles for the service and characteristics to notify the ESP32\+C6 of changes in the controller\textquotesingle{}s state. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+main/\mbox{\hyperlink{gattc_8h}{gattc.\+h}}\end{DoxyCompactItemize}

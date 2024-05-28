@@ -1,0 +1,59 @@
+\doxysection{Stadia\+Rep Struct Reference}
+\hypertarget{struct_stadia_rep}{}\label{struct_stadia_rep}\index{StadiaRep@{StadiaRep}}
+
+
+{\ttfamily \#include $<$rep\+\_\+queue.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_stadia_rep_a55b570deda1177b5158af91301361fd2}\label{struct_stadia_rep_a55b570deda1177b5158af91301361fd2} 
+uint8\+\_\+t {\bfseries dpad}
+\item 
+\Hypertarget{struct_stadia_rep_ad8e5ef787f463d3f8711b16b77dff068}\label{struct_stadia_rep_ad8e5ef787f463d3f8711b16b77dff068} 
+uint8\+\_\+t {\bfseries buttons1}
+\item 
+\Hypertarget{struct_stadia_rep_aa542cc1a35485e434541b9cecaa0f8d8}\label{struct_stadia_rep_aa542cc1a35485e434541b9cecaa0f8d8} 
+uint8\+\_\+t {\bfseries buttons2}
+\item 
+\Hypertarget{struct_stadia_rep_a506fab073f6617664c6ffa8a94a65d34}\label{struct_stadia_rep_a506fab073f6617664c6ffa8a94a65d34} 
+uint8\+\_\+t {\bfseries stickX}
+\item 
+\Hypertarget{struct_stadia_rep_ad9e3a1a7b6b7487105e456c83f96a7d8}\label{struct_stadia_rep_ad9e3a1a7b6b7487105e456c83f96a7d8} 
+uint8\+\_\+t {\bfseries stickY}
+\item 
+\Hypertarget{struct_stadia_rep_aa84e4359076a79f7a07ecde50e81689e}\label{struct_stadia_rep_aa84e4359076a79f7a07ecde50e81689e} 
+uint8\+\_\+t {\bfseries stickZ}
+\item 
+\Hypertarget{struct_stadia_rep_ae0a3aed299870c8de82cd076411df1da}\label{struct_stadia_rep_ae0a3aed299870c8de82cd076411df1da} 
+uint8\+\_\+t {\bfseries stick\+Rz}
+\item 
+\Hypertarget{struct_stadia_rep_a027deb68e7771de9fad8d6437eff055a}\label{struct_stadia_rep_a027deb68e7771de9fad8d6437eff055a} 
+uint8\+\_\+t {\bfseries brake}
+\item 
+\Hypertarget{struct_stadia_rep_a9a7b7f48170bd7e636587415f726c72a}\label{struct_stadia_rep_a9a7b7f48170bd7e636587415f726c72a} 
+uint8\+\_\+t {\bfseries throttle}
+\item 
+\Hypertarget{struct_stadia_rep_aaa4d751e841d7c7e22726e566bd15045}\label{struct_stadia_rep_aaa4d751e841d7c7e22726e566bd15045} 
+uint8\+\_\+t {\bfseries volume}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+STADIA HID REPORT STRUCTURE The HID report from the Stadia controller is a 10 byte sequence. The bytes are as follows\+:
+\begin{DoxyItemize}
+\item Byte 1\+: 4 bits of D-\/pad, 4 bits of padding
+\item Byte 2\+: 8 bits of buttons
+\item Byte 3\+: 7 bits of buttons, 1 bit of padding
+\item Byte 4\+: 8 bits pointer X on stick
+\item Byte 5\+: 8 bits pointer Y on stick
+\item Byte 6\+: 8 bits pointer Z on stick
+\item Byte 7\+: 8 bits pointer Rz on stick
+\item Byte 8\+: 8 bits of Brake trigger
+\item Byte 9\+: 8 bits of Throttle trigger
+\item Byte 10\+: 3 bits for volume, play/pause, 5 bits of padding. (Used when a headset is connected directly to the controller. Not used in this project.) 
+\end{DoxyItemize}
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+main/\mbox{\hyperlink{rep__queue_8h}{rep\+\_\+queue.\+h}}\end{DoxyCompactItemize}
