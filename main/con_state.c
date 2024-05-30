@@ -48,7 +48,7 @@ float unsign_pct(uint8_t val) {
 }
 
 char *str_of_button(Button_t* button) {
-    // button messages are in the format "ID;PRESSED\0"
+    // button messages are in the format "ID;PRESSED\n"
     char *str_bldr = malloc(sizeof(char) * 6);
     char *place = str_bldr;
     strcpy(str_bldr, button->id);
@@ -57,12 +57,12 @@ char *str_of_button(Button_t* button) {
     place += 1;
     strcpy(str_bldr, button->pressed ? "1" : "0");
     place += 1;
-    strcpy(place, "\0");
+    strcpy(place, "\n");
     return str_bldr;
 }
 
 char *str_of_joystick(Joystick_t* joystick) {
-    // joystick messages are in the format "ID;X;Y\0"
+    // joystick messages are in the format "ID;X;Y\n"
     char *str_bldr = malloc(sizeof(char) * 16);
     char *place = str_bldr;
     strcpy(str_bldr, joystick->id);
@@ -75,12 +75,12 @@ char *str_of_joystick(Joystick_t* joystick) {
     place += 1;
     sprintf(place, "%4f", joystick->y);
     place += 5;
-    strcpy(place, "\0");
+    strcpy(place, "\n");
     return str_bldr;
 }
 
 char *str_of_trigger(Trigger_t* trigger) {
-    // trigger messages are in the format "ID;VAL\0"
+    // trigger messages are in the format "ID;VAL\n"
     char *str_bldr = malloc(sizeof(char) * 10);
     char *place = str_bldr;
     strcpy(str_bldr, trigger->id);
@@ -89,7 +89,7 @@ char *str_of_trigger(Trigger_t* trigger) {
     place += 1;
     sprintf(place, "%4f", trigger->val);
     place += 5;
-    strcpy(place, "\0");
+    strcpy(place, "\n");
     return str_bldr;
 }
 
@@ -136,7 +136,7 @@ char *str_of_dpad_dir(DPadDir_t dir) {
 }
 
 char *str_of_dpad(DPad_t* dpad) {
-    // dpad messages are in the format "ID;DIR\0"
+    // dpad messages are in the format "ID;DIR\n"
     char *str_bldr = malloc(sizeof(char) * 7);
     char *place = str_bldr;
     strcpy(str_bldr, dpad->id);
@@ -146,7 +146,7 @@ char *str_of_dpad(DPad_t* dpad) {
     char *dir_str = str_of_dpad_dir(dpad->dir);
     strcpy(place, dir_str);
     place += strlen(dir_str);
-    strcpy(place, "\0");
+    strcpy(place, "\n");
     return str_bldr;
 }
 
