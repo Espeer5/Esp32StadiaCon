@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>StadiaCon: main/globalconst.c File Reference</title>
+<title>StadiaCon: main/globalconst.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,65 +89,31 @@ $(function(){ initResizable(false); });
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">globalconst.c File Reference</div></div>
+  <div class="headertitle"><div class="title">globalconst.h</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Global constants and definitions for the ESP32C6 to connect to a Google Stadia Controller over BLE.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="globalconst_8h_source.html">globalconst.h</a>&quot;</code><br />
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a2bd6b24457c5f62be39d31d871e3124b" id="r_a2bd6b24457c5f62be39d31d871e3124b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2bd6b24457c5f62be39d31d871e3124b">publish_controls</a> [20]</td></tr>
-<tr class="separator:a2bd6b24457c5f62be39d31d871e3124b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Global constants and definitions for the ESP32C6 to connect to a Google Stadia Controller over BLE. </p>
-<dl class="section version"><dt>Version</dt><dd>V1.0 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Edward Speer </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>05/25/24 </dd></dl>
-</div><h2 class="groupheader">Variable Documentation</h2>
-<a id="a2bd6b24457c5f62be39d31d871e3124b" name="a2bd6b24457c5f62be39d31d871e3124b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bd6b24457c5f62be39d31d871e3124b">&#9670;&#160;</a></span>publish_controls</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool publish_controls[20]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">false</span>,  </div>
-<div class="line">    <span class="keyword">false</span>,  </div>
-<div class="line">    <span class="keyword">false</span>,  </div>
-<div class="line">    <span class="keyword">false</span>,  </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">false</span>,  </div>
-<div class="line">    <span class="keyword">false</span>,  </div>
-<div class="line">    <span class="keyword">false</span>,  </div>
-<div class="line">    <span class="keyword">false</span>,  </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>    </div>
-<div class="line">}</div>
-</div><!-- fragment -->
-</div>
-</div>
-</div><!-- contents -->
+<a href="globalconst_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#ifndef _GLOBALCONST_H_</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define _GLOBALCONST_H_</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// One entry for each control on the controller indicating whether or not to</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// publish notifications for the control state</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">extern</span> <span class="keywordtype">bool</span> publish_controls[20];</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// Tag for the GATT client. Used for logging globally, not just within gatt</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// client files.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define GATTC_TAG &quot;STADIA_CON_CLIENT&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// Device name for the Google Stadia Controller.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#define remote_device_name &quot;StadiaBWVQ-855f&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">// Toggle debug logging for the GATT client</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#define GATTC_DEBUG 0</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif </span><span class="comment">/* #ifndef _GLOBALCONST_H_ */</span><span class="preprocessor"></span></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0

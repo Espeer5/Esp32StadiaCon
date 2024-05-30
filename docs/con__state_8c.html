@@ -99,6 +99,7 @@ $(function(){ initResizable(false); });
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="con__state_8h_source.html">con_state.h</a>&quot;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;assert.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
@@ -112,6 +113,21 @@ Functions</h2></td></tr>
 <tr class="memitem:a9f9f4a7ce4da453883ed831777e48a57" id="r_a9f9f4a7ce4da453883ed831777e48a57"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f9f4a7ce4da453883ed831777e48a57">unsign_pct</a> (uint8_t val)</td></tr>
 <tr class="memdesc:a9f9f4a7ce4da453883ed831777e48a57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a uint8_t value to an unsigned percentage for a trigger.  <br /></td></tr>
 <tr class="separator:a9f9f4a7ce4da453883ed831777e48a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae4e22f3e8bc7068b7006d2ceb682ab1" id="r_aae4e22f3e8bc7068b7006d2ceb682ab1"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae4e22f3e8bc7068b7006d2ceb682ab1">str_of_button</a> (<a class="el" href="con__state_8h.html#a9b2b77806b9ebe02ae49fe65fb0d7eec">Button_t</a> *button)</td></tr>
+<tr class="memdesc:aae4e22f3e8bc7068b7006d2ceb682ab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string representation of a button.  <br /></td></tr>
+<tr class="separator:aae4e22f3e8bc7068b7006d2ceb682ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28f88f1c6c4da3504d81838dfbf2870d" id="r_a28f88f1c6c4da3504d81838dfbf2870d"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28f88f1c6c4da3504d81838dfbf2870d">str_of_joystick</a> (<a class="el" href="con__state_8h.html#abda4bcfd3086109f0b083a40999c0ad4">Joystick_t</a> *joystick)</td></tr>
+<tr class="memdesc:a28f88f1c6c4da3504d81838dfbf2870d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string representation of a joystick.  <br /></td></tr>
+<tr class="separator:a28f88f1c6c4da3504d81838dfbf2870d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeead23becf876af4148ecc2a791cb4a8" id="r_aeead23becf876af4148ecc2a791cb4a8"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeead23becf876af4148ecc2a791cb4a8">str_of_trigger</a> (<a class="el" href="con__state_8h.html#ab61ffbd6da6f72e48c1701d3d35b2063">Trigger_t</a> *trigger)</td></tr>
+<tr class="memdesc:aeead23becf876af4148ecc2a791cb4a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string representation of a trigger.  <br /></td></tr>
+<tr class="separator:aeead23becf876af4148ecc2a791cb4a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12725d45957093ad72e4e9e9de34c276" id="r_a12725d45957093ad72e4e9e9de34c276"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12725d45957093ad72e4e9e9de34c276">str_of_dpad_dir</a> (<a class="el" href="con__state_8h.html#a2c1ff2325596599694e333e146b142b7">DPadDir_t</a> dir)</td></tr>
+<tr class="memdesc:a12725d45957093ad72e4e9e9de34c276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string representation of a D-pad direction.  <br /></td></tr>
+<tr class="separator:a12725d45957093ad72e4e9e9de34c276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9cfa3c62a21eaecc5a74798bf92eee6" id="r_ac9cfa3c62a21eaecc5a74798bf92eee6"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9cfa3c62a21eaecc5a74798bf92eee6">str_of_dpad</a> (<a class="el" href="con__state_8h.html#ac2a19185c817024c2051dd63ba940e3f">DPad_t</a> *dpad)</td></tr>
+<tr class="memdesc:ac9cfa3c62a21eaecc5a74798bf92eee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string representation of a D-pad.  <br /></td></tr>
+<tr class="separator:ac9cfa3c62a21eaecc5a74798bf92eee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0950cdd404757e2ba1641156077bd983" id="r_a0950cdd404757e2ba1641156077bd983"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0950cdd404757e2ba1641156077bd983">update_button</a> (<a class="el" href="con__state_8h.html#a9b2b77806b9ebe02ae49fe65fb0d7eec">Button_t</a> *button, bool value)</td></tr>
 <tr class="memdesc:a0950cdd404757e2ba1641156077bd983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the state of a button with a new value fetched from a report.  <br /></td></tr>
 <tr class="separator:a0950cdd404757e2ba1641156077bd983"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,6 +232,141 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The signed percentage value. </dd></dl>
+
+</div>
+</div>
+<a id="aae4e22f3e8bc7068b7006d2ceb682ab1" name="aae4e22f3e8bc7068b7006d2ceb682ab1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae4e22f3e8bc7068b7006d2ceb682ab1">&#9670;&#160;</a></span>str_of_button()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * str_of_button </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="con__state_8h.html#a9b2b77806b9ebe02ae49fe65fb0d7eec">Button_t</a> *</td>          <td class="paramname"><span class="paramname"><em>button</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the string representation of a button. </p>
+<p>This function is used to return the string representation of a button. The function takes a pointer to a Button_t struct and returns a pointer to a string representation of the button.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">button</td><td>A pointer to the Button_t struct to get the string representation of. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a string representation of the button. </dd></dl>
+
+</div>
+</div>
+<a id="ac9cfa3c62a21eaecc5a74798bf92eee6" name="ac9cfa3c62a21eaecc5a74798bf92eee6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9cfa3c62a21eaecc5a74798bf92eee6">&#9670;&#160;</a></span>str_of_dpad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * str_of_dpad </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="con__state_8h.html#ac2a19185c817024c2051dd63ba940e3f">DPad_t</a> *</td>          <td class="paramname"><span class="paramname"><em>dpad</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the string representation of a D-pad. </p>
+<p>This function is used to return the string representation of a D-pad. The function takes a pointer to a DPad_t struct and returns a pointer to a string representation of the D-pad.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dpad</td><td>A pointer to the DPad_t struct to get the string representation of. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a string representation of the D-pad. </dd></dl>
+
+</div>
+</div>
+<a id="a12725d45957093ad72e4e9e9de34c276" name="a12725d45957093ad72e4e9e9de34c276"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12725d45957093ad72e4e9e9de34c276">&#9670;&#160;</a></span>str_of_dpad_dir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * str_of_dpad_dir </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="con__state_8h.html#a2c1ff2325596599694e333e146b142b7">DPadDir_t</a></td>          <td class="paramname"><span class="paramname"><em>dir</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the string representation of a D-pad direction. </p>
+<p>This function is used to return the string representation of a D-pad dir. The function takes a DPadDir_t value and returns a pointer to a string representation of the direction.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dir</td><td>The DPadDir_t value to get the string representation of. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a string representation of the D-pad direction. </dd></dl>
+
+</div>
+</div>
+<a id="a28f88f1c6c4da3504d81838dfbf2870d" name="a28f88f1c6c4da3504d81838dfbf2870d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28f88f1c6c4da3504d81838dfbf2870d">&#9670;&#160;</a></span>str_of_joystick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * str_of_joystick </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="con__state_8h.html#abda4bcfd3086109f0b083a40999c0ad4">Joystick_t</a> *</td>          <td class="paramname"><span class="paramname"><em>joystick</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the string representation of a joystick. </p>
+<p>This function is used to return the string representation of a joystick. The function takes a pointer to a Joystick_t struct and returns a pointer to a string representation of the joystick.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">joystick</td><td>A pointer to the Joystick_t struct to get the string representation of. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a string representation of the joystick. </dd></dl>
+
+</div>
+</div>
+<a id="aeead23becf876af4148ecc2a791cb4a8" name="aeead23becf876af4148ecc2a791cb4a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeead23becf876af4148ecc2a791cb4a8">&#9670;&#160;</a></span>str_of_trigger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * str_of_trigger </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="con__state_8h.html#ab61ffbd6da6f72e48c1701d3d35b2063">Trigger_t</a> *</td>          <td class="paramname"><span class="paramname"><em>trigger</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the string representation of a trigger. </p>
+<p>This function is used to return the string representation of a trigger. The function takes a pointer to a Trigger_t struct and returns a pointer to a string representation of the trigger.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">trigger</td><td>A pointer to the Trigger_t struct to get the string representation of. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a string representation of the trigger. </dd></dl>
 
 </div>
 </div>
