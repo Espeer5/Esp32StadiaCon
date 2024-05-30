@@ -9,7 +9,7 @@
 */
 
 #include "auth_gap.h"
-#include "globalconst.c"
+#include "globalconst.h"
 #include "gattc.h"
 
 // Variable shared between the GAP profile and GATTC profile indicating 

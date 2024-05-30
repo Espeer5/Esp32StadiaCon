@@ -8,17 +8,30 @@
  * @date    05/25/24
 */
 
-#ifndef _GLOBALCONST_H_
-#define _GLOBALCONST_H_
+#include <stdbool.h>
+#include "globalconst.h"
 
-// Tag for the GATT client. Used for logging globally, not just within gatt
-// client files.
-#define GATTC_TAG "STADIA_CON_CLIENT"
-
-// Device name for the Google Stadia Controller.
-#define remote_device_name "StadiaBWVQ-855f"
-
-// Toggle debug logging for the GATT client
-#define GATTC_DEBUG 0
-
-#endif /* #ifndef _GLOBALCONST_H_ */
+// One entry for each control on the controller indicating whether or not to
+// publish notifications for the control state
+bool publish_controls[20] = {
+    true,   // LAB
+    true,   // LBB
+    true,   // LXB
+    true,   // LYB
+    false,  // LTB
+    false,  // RTB
+    false,  // RSB
+    false,  // LSB
+    true,   // STB
+    false,  // MEN
+    false,  // CPT
+    false,  // GAS
+    false,  // OPT
+    true,   // RBP
+    true,   // LBP
+    true,   // LJS
+    true,   // RJS
+    true,   // LTR
+    true,   // RTR
+    true    // DPD
+};

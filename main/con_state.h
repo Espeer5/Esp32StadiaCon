@@ -27,6 +27,18 @@ typedef struct Button {
 } Button_t;
 
 /**
+ * @brief Returns the string representation of a button.
+ * 
+ * This function is used to return the string representation of a button. The
+ * function takes a pointer to a Button_t struct and returns a pointer to a string
+ * representation of the button.
+ * 
+ * @param button A pointer to the Button_t struct to get the string representation of.
+ * @return A pointer to a string representation of the button.
+*/
+char *str_of_button(Button_t* button);
+
+/**
  * @brief Represents a joystick on the controller.
  * 
  * This struct is used to represent a joystick on the controller. It contains
@@ -44,6 +56,18 @@ typedef struct Joystick {
 } Joystick_t;
 
 /**
+ * @brief Returns the string representation of a joystick.
+ * 
+ * This function is used to return the string representation of a joystick. The
+ * function takes a pointer to a Joystick_t struct and returns a pointer to a
+ * string representation of the joystick.
+ * 
+ * @param joystick A pointer to the Joystick_t struct to get the string representation of.
+ * @return A pointer to a string representation of the joystick.
+*/
+char *str_of_joystick(Joystick_t* joystick);
+
+/**
  * @brief Represents a trigger on the controller.
  * 
  * This struct is used to represent a trigger on the controller. It contains a
@@ -57,6 +81,18 @@ typedef struct Trigger {
     char id[3];   // The unique identifier of the trigger.
     float val;    // The position of the trigger as a percentage.
 } Trigger_t;
+
+/**
+ * @brief Returns the string representation of a trigger.
+ * 
+ * This function is used to return the string representation of a trigger. The
+ * function takes a pointer to a Trigger_t struct and returns a pointer to a
+ * string representation of the trigger.
+ * 
+ * @param trigger A pointer to the Trigger_t struct to get the string representation of.
+ * @return A pointer to a string representation of the trigger.
+*/
+char *str_of_trigger(Trigger_t* trigger);
 
 /**
  * @brief Represents the possible compass directions of a D-pas.
@@ -78,6 +114,18 @@ typedef enum DPadDir {
 } DPadDir_t;
 
 /**
+ * @brief Returns the string representation of a D-pad direction.
+ * 
+ * This function is used to return the string representation of a D-pad dir.
+ * The function takes a DPadDir_t value and returns a pointer to a string
+ * representation of the direction.
+ * 
+ * @param dir The DPadDir_t value to get the string representation of.
+ * @return A pointer to a string representation of the D-pad direction.
+*/
+char *str_of_dpad_dir(DPadDir_t dir);
+
+/**
  * @brief Represents a D-pad on the controller.
  * 
  * This struct is used to represent a D-pad on the controller. It contains a 
@@ -88,6 +136,18 @@ typedef struct DPad {
     char id[3];     // The unique identifier of the D-pad.
     DPadDir_t dir;  // The direction the D-pad is pressed.
 } DPad_t;
+
+/**
+ * @brief Returns the string representation of a D-pad.
+ * 
+ * This function is used to return the string representation of a D-pad. The
+ * function takes a pointer to a DPad_t struct and returns a pointer to a string
+ * representation of the D-pad.
+ * 
+ * @param dpad A pointer to the DPad_t struct to get the string representation of.
+ * @return A pointer to a string representation of the D-pad.
+*/
+char *str_of_dpad(DPad_t* dpad);
 
 /**
  * @brief Represents the state of the Google Stadia controller.

@@ -9,6 +9,7 @@
 
 #include "con_state.h"
 #include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 #include <stdint.h>
 #include <stddef.h>
@@ -44,6 +45,109 @@ float sign_pct(uint8_t val) {
 
 float unsign_pct(uint8_t val) {
     return (float) val / 255.0 * 100.0;
+}
+
+char *str_of_button(Button_t* button) {
+    // button messages are in the format "ID;PRESSED\0"
+    char *str_bldr = malloc(sizeof(char) * 6);
+    char *place = str_bldr;
+    strcpy(str_bldr, button->id);
+    place += strlen(button->id);
+    strcpy(place, ";");
+    place += 1;
+    strcpy(str_bldr, button->pressed ? "1" : "0");
+    place += 1;
+    strcpy(place, "\0");
+    return str_bldr;
+}
+
+char *str_of_joystick(Joystick_t* joystick) {
+    // joystick messages are in the format "ID;X;Y\0"
+    char *str_bldr = malloc(sizeof(char) * 16);
+    char *place = str_bldr;
+    strcpy(str_bldr, joystick->id);
+    place += strlen(joystick->id);
+    strcpy(place, ";");
+    place += 1;
+    sprintf(place, "%4f", joystick->x);
+    place += 5;
+    strcpy(place, ";");
+    place += 1;
+    sprintf(place, "%4f", joystick->y);
+    place += 5;
+    strcpy(place, "\0");
+    return str_bldr;
+}
+
+char *str_of_trigger(Trigger_t* trigger) {
+    // trigger messages are in the format "ID;VAL\0"
+    char *str_bldr = malloc(sizeof(char) * 10);
+    char *place = str_bldr;
+    strcpy(str_bldr, trigger->id);
+    place += strlen(trigger->id);
+    strcpy(place, ";");
+    place += 1;
+    sprintf(place, "%4f", trigger->val);
+    place += 5;
+    strcpy(place, "\0");
+    return str_bldr;
+}
+
+char *str_of_dpad_dir(DPadDir_t dir) {
+    // DPad directions as strings are compass directions.
+    switch (dir) {
+        case N: {
+            return "N";
+            break;
+        }
+        case NE: {
+            return "NE";
+            break;
+        }
+        case E: {
+            return "E";
+            break;
+        }
+        case SE: {
+            return "SE";
+            break;
+        }
+        case S: {
+            return "S";
+            break;
+        }
+        case SW: {
+            return "SW";
+            break;
+        }
+        case W: {
+            return "W";
+            break;
+        }
+        case NW: {
+            return "NW";
+            break;
+        }
+        default: {
+            return "NO";
+            break;
+        }
+    }
+}
+
+char *str_of_dpad(DPad_t* dpad) {
+    // dpad messages are in the format "ID;DIR\0"
+    char *str_bldr = malloc(sizeof(char) * 7);
+    char *place = str_bldr;
+    strcpy(str_bldr, dpad->id);
+    place += strlen(dpad->id);
+    strcpy(place, ";");
+    place += 1;
+    char *dir_str = str_of_dpad_dir(dpad->dir);
+    strcpy(place, dir_str);
+    place += strlen(dir_str);
+    strcpy(place, "\0");
+    return str_bldr;
 }
 
 int update_button(Button_t* button, bool value) {

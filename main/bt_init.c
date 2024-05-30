@@ -26,7 +26,7 @@
 #include "bt_init.h"
 #include "auth_gap.h"
 #include "gattc.h"
-#include "globalconst.c"
+#include "globalconst.h"
 
 void bt_nvs_init(void) {
     // Initialize NVS.

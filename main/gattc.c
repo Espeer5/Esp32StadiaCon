@@ -15,7 +15,7 @@
 #include "rep_queue.h"
 #include "gattc.h"
 #include "auth_gap.h"
-#include "globalconst.c"
+#include "globalconst.h"
 
 // Placeholder for an empty char handle when searching all chars in service
 #define INVALID_HANDLE   0

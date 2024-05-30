@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 
+#include "freertos/FreeRTOS.h"
 #include "nvs.h"
 #include "nvs_flash.h"
 #include "esp_bt.h"
@@ -26,7 +27,6 @@
 #include "esp_bt_main.h"
 #include "esp_gatt_common_api.h"
 #include "esp_log.h"
-#include "freertos/FreeRTOS.h"
 
 #define HID_SERVICE_UUID 0x1812  // HID Service UUID
 #define HID_RPT_CHAR_UUID 0x2A4D // HID Report Characteristic UUID
