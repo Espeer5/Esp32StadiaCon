@@ -88,13 +88,39 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">StadiaCon </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a> This package uses the esp32 Bluedroid stack to connect esp32C6 development board to a Google Stadia controller with the generic ble firmware installed on it.</p>
+<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a> This package uses the esp32 Bluedroid stack to connect esp32C6 development board to a Google Stadia controller with the generic ble firmware installed on it. It then outputs the commands issued from the Stadia controller out as ASCII over the USB/UART bridge on the C6.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
+Control IDS:</h1>
+<p>Each control on the Stadia controller is assigned 3 letter unique identifier which proceeds the value in the output. These are assigned according to the following map:</p>
+<p><img src="ID_CON_MAP.jpeg" alt="Stadia Controller Map" class="inline"/></p>
+<p>Notice that the triggers have two IDs assigned each, one which ranges from 0-100 (LTR/RTR) as the trigger is pressed, and another which is digital (LTB/RTB).</p>
+<p>The joysticks also have two assigned IDs, one for the stick pointing direction (LJS/RJS) and one for the button activated by pressing down on the stick (LSB/RSB).</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Configuration:</h1>
+<p>The options configureable to a user of this package may be edited in the <a class="el" href="globalconst_8h.html" title="Global constants and definitions for the ESP32C6 to connect to a Google Stadia Controller over BLE.">globalconst.h</a>/globalconst.c files under the main directory. The options are:</p>
+<ul>
+<li><code>#define remote_device_name</code>: The name of the remote device to connect to. This should be the name of the Google Stadia controller. Different controllers will have different identifiers in their names so this should be edited to your device to discover your device when scanning.</li>
+<li><code>#define GATTC_DEBUG</code>: Enables debug logging for the ble paring process</li>
+<li><code>#define UART_DEBUG</code>: Enables debug logging for the output of the controller commands. Will print the commands that should be being written to UART to the console.</li>
+<li><code>const uart_port_t uart_num</code>: The UART port to write the controller commands to. This should be set to the port that the USB/UART bridge is connected to on the esp32C6.</li>
+<li><code>bool publish_controls[20]</code>: One bool for every output identifier on the controller. If set to true, the output of that control will be written to the UART port. If set to false, the output of that control will be ignored.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Structure</h1>
 <p>The ble utility functions are organized into modules:</p><ul>
-<li>auth_gap: Sets up low-level GAP profile for connecting to the Google Stadia controller using proper security and authentication</li>
-<li><a class="el" href="gattc_8c.html" title="Implementation of the GATT client for the ESP32C6 to connect to a Google Stadia Controller over BLE.">gattc.c</a>: Sets up a GATT client profile which establishes notification on and reads HID reports from the Stadia controller</li>
-<li>bt_init: Methods used to fully intialize the bluetooth hardware, bluetooth stack, GATT and GAP profiles, and ble authentication </li>
+<li>ble - all bluetooth functionality<ul>
+<li><a class="el" href="auth__gap_8h_source.html">auth_gap.h</a> - all pairing and authentication functions</li>
+<li><a class="el" href="gattc_8h.html" title="Definitions and setup method prototypes for using ESP32C6 as a GATT client to connect to a Google Sta...">gattc.h</a> - all gatt client functions for receiving data from the controller</li>
+<li><a class="el" href="bt__init_8h.html" title="Definitions and setup method prototypes for initializing the ESP32C6 as a Bluetooth device and settin...">bt_init.h</a> - all bluetooth initialization functions</li>
+</ul>
+</li>
+<li>publish - All functions for writing the controller commands to the UART port<ul>
+<li><a class="el" href="rep__queue_8h.html" title="Method prototypes for the RepQueue class.">rep_queue.h</a> - A queue for storing controller command reports to be parsed and written to the UART</li>
+<li><a class="el" href="con__state_8h.html" title="Definitions and method prototypes of ConState, a struct representing the previous saved state of the ...">con_state.h</a> - Stores the current state of the controller and updates it based on the reports received. Outputs the commands to the UART when they are updated and the control is set to be published.</li>
+</ul>
+</li>
+<li><a class="el" href="globalconst_8h.html" title="Global constants and definitions for the ESP32C6 to connect to a Google Stadia Controller over BLE.">globalconst.h</a> - user configuration options</li>
+<li><a class="el" href="main_8c.html" title="Main file for the ESP32C6 to connect to a Google Stadia Controller over BLE.">main.c</a> - The main function which initializes the bluetooth stack, connects to the controller, and then enters a loop to receive and publish controller commands. </li>
 </ul>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"/>

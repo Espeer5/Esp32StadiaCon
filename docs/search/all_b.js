@@ -9,5 +9,5 @@ var searchData=
   ['str_5fof_5fdpad_5fdir_6',['str_of_dpad_dir',['../con__state_8c.html#a12725d45957093ad72e4e9e9de34c276',1,'str_of_dpad_dir(DPadDir_t dir):&#160;con_state.c'],['../con__state_8h.html#a12725d45957093ad72e4e9e9de34c276',1,'str_of_dpad_dir(DPadDir_t dir):&#160;con_state.c']]],
   ['str_5fof_5fjoystick_7',['str_of_joystick',['../con__state_8c.html#a28f88f1c6c4da3504d81838dfbf2870d',1,'str_of_joystick(Joystick_t *joystick):&#160;con_state.c'],['../con__state_8h.html#a28f88f1c6c4da3504d81838dfbf2870d',1,'str_of_joystick(Joystick_t *joystick):&#160;con_state.c']]],
   ['str_5fof_5ftrigger_8',['str_of_trigger',['../con__state_8c.html#aeead23becf876af4148ecc2a791cb4a8',1,'str_of_trigger(Trigger_t *trigger):&#160;con_state.c'],['../con__state_8h.html#aeead23becf876af4148ecc2a791cb4a8',1,'str_of_trigger(Trigger_t *trigger):&#160;con_state.c']]],
-  ['structure_9',['Structure',['../index.html#autotoc_md1',1,'']]]
+  ['structure_9',['Structure',['../index.html#autotoc_md3',1,'']]]
 ];
