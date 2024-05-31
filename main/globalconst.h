@@ -32,6 +32,6 @@ extern const uart_port_t uart_num;
 #define GATTC_DEBUG false
 
 // Toggle debug logging for UART output
-#define UART_DEBUG true
+#define UART_DEBUG false
 
 #endif /* #ifndef _GLOBALCONST_H_ */

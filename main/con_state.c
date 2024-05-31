@@ -76,12 +76,14 @@ char *str_of_joystick(Joystick_t* joystick) {
     snprintf(x_str, 6, "%.2f", joystick->x);
     strcpy(place, x_str);
     place += strlen(x_str);
+    free(x_str);
     strcpy(place, ";");
     place += 1;
     char *y_str = malloc(sizeof(char) * 6);
     snprintf(y_str, 6, "%.2f", joystick->y);
     strcpy(place, y_str);
     place += strlen(y_str);
+    free(y_str);
     strcpy(place, "\n");
     return str_bldr;
 }
@@ -98,6 +100,7 @@ char *str_of_trigger(Trigger_t* trigger) {
     snprintf(extnt_str, 6, "%.2f", trigger->val);
     strcpy(place, extnt_str);
     place += strlen(extnt_str);
+    free(extnt_str);
     strcpy(place, "\n");
     return str_bldr;
 }
@@ -169,7 +172,7 @@ void update_button(Button_t* button, bool value, bool publish) {
         if (UART_DEBUG) {
             ets_printf("%s", msg);
         }
-        // uart_write_bytes(uart_num, msg, strlen(msg));
+        uart_write_bytes(uart_num, msg, strlen(msg));
         free(msg);
     }
     return;
@@ -186,7 +189,7 @@ void update_joystick(Joystick_t* joystick, float x, float y, bool publish) {
         if (UART_DEBUG) {
             ets_printf("%s", msg);
         }
-        // uart_write_bytes(uart_num, msg, strlen(msg));
+        uart_write_bytes(uart_num, msg, strlen(msg));
         free(msg);
     }
     return;
@@ -202,7 +205,7 @@ void update_trigger(Trigger_t* trigger, float value, bool publish) {
         if (UART_DEBUG) {
             ets_printf("%s", msg);
         }
-        // uart_write_bytes(uart_num, msg, strlen(msg));
+        uart_write_bytes(uart_num, msg, strlen(msg));
         free(msg);
     }
     return;
@@ -218,7 +221,7 @@ void update_dpad(DPad_t* dpad, DPadDir_t dir, bool publish) {
         if (UART_DEBUG) {
             ets_printf("%s", msg);
         }
-        // uart_write_bytes(uart_num, msg, strlen(msg));
+        uart_write_bytes(uart_num, msg, strlen(msg));
         free(msg);
     }
     return;
