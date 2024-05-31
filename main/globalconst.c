@@ -10,28 +10,32 @@
 
 #include <stdbool.h>
 #include "globalconst.h"
+#include "driver/uart.h"
+
+// The UART port to output notifications on
+const uart_port_t uart_num = UART_NUM_0;
 
 // One entry for each control on the controller indicating whether or not to
 // publish notifications for the control state
 bool publish_controls[20] = {
+    true,   // DPD
+    false,  // RSB
+    false,  // OPT
+    false,  // MEN
+    false,  // STB
+    false,  // RTB
+    false,  // LTB
+    false,  // GAS
+    false,  // CPT
     true,   // LAB
     true,   // LBB
     true,   // LXB
     true,   // LYB
-    false,  // LTB
-    false,  // RTB
-    false,  // RSB
-    false,  // LSB
-    true,   // STB
-    false,  // MEN
-    false,  // CPT
-    false,  // GAS
-    false,  // OPT
-    true,   // RBP
     true,   // LBP
+    true,   // RBP
+    false,  // LSB
     true,   // LJS
     true,   // RJS
     true,   // LTR
-    true,   // RTR
-    true    // DPD
+    true    // RTR
 };

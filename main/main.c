@@ -51,7 +51,7 @@ void app_main(void) {
         // Dequeue the report from the queue
         StadiaRep_t *rep = dequeue_stadia_rep(repQueue);
         // Update the controller state with the new report
-        int *changed = update_controller(&state, rep);
+        update_controller(&state, rep);
         // Free the report
         free(rep);
     }

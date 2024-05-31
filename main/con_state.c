@@ -8,6 +8,9 @@
 */
 
 #include "con_state.h"
+#include "driver/uart.h"
+#include "globalconst.h"
+#include "rom/ets_sys.h"
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
@@ -49,13 +52,13 @@ float unsign_pct(uint8_t val) {
 
 char *str_of_button(Button_t* button) {
     // button messages are in the format "ID;PRESSED\n"
-    char *str_bldr = malloc(sizeof(char) * 6);
+    char *str_bldr = malloc(sizeof(char) * 7);
     char *place = str_bldr;
-    strcpy(str_bldr, button->id);
-    place += strlen(button->id);
+    strncpy(str_bldr, button->id, 3);
+    place += 3;
     strcpy(place, ";");
     place += 1;
-    strcpy(str_bldr, button->pressed ? "1" : "0");
+    strcpy(place, button->pressed ? "1" : "0");
     place += 1;
     strcpy(place, "\n");
     return str_bldr;
@@ -63,32 +66,38 @@ char *str_of_button(Button_t* button) {
 
 char *str_of_joystick(Joystick_t* joystick) {
     // joystick messages are in the format "ID;X;Y\n"
-    char *str_bldr = malloc(sizeof(char) * 16);
+    char *str_bldr = malloc(sizeof(char) * 19);
     char *place = str_bldr;
-    strcpy(str_bldr, joystick->id);
+    strncpy(str_bldr, joystick->id, 3);
     place += strlen(joystick->id);
     strcpy(place, ";");
     place += 1;
-    sprintf(place, "%4f", joystick->x);
-    place += 5;
+    char *x_str = malloc(sizeof(char) * 6);
+    snprintf(x_str, 6, "%.2f", joystick->x);
+    strcpy(place, x_str);
+    place += strlen(x_str);
     strcpy(place, ";");
     place += 1;
-    sprintf(place, "%4f", joystick->y);
-    place += 5;
+    char *y_str = malloc(sizeof(char) * 6);
+    snprintf(y_str, 6, "%.2f", joystick->y);
+    strcpy(place, y_str);
+    place += strlen(y_str);
     strcpy(place, "\n");
     return str_bldr;
 }
 
 char *str_of_trigger(Trigger_t* trigger) {
     // trigger messages are in the format "ID;VAL\n"
-    char *str_bldr = malloc(sizeof(char) * 10);
+    char *str_bldr = malloc(sizeof(char) * 11);
     char *place = str_bldr;
-    strcpy(str_bldr, trigger->id);
-    place += strlen(trigger->id);
+    char *extnt_str = malloc(sizeof(char) * 5);
+    strncpy(str_bldr, trigger->id, 3);
+    place += 3;
     strcpy(place, ";");
     place += 1;
-    sprintf(place, "%4f", trigger->val);
-    place += 5;
+    snprintf(extnt_str, 6, "%.2f", trigger->val);
+    strcpy(place, extnt_str);
+    place += strlen(extnt_str);
     strcpy(place, "\n");
     return str_bldr;
 }
@@ -139,7 +148,7 @@ char *str_of_dpad(DPad_t* dpad) {
     // dpad messages are in the format "ID;DIR\n"
     char *str_bldr = malloc(sizeof(char) * 7);
     char *place = str_bldr;
-    strcpy(str_bldr, dpad->id);
+    strncpy(str_bldr, dpad->id, 3);
     place += strlen(dpad->id);
     strcpy(place, ";");
     place += 1;
@@ -150,37 +159,69 @@ char *str_of_dpad(DPad_t* dpad) {
     return str_bldr;
 }
 
-int update_button(Button_t* button, bool value) {
+void update_button(Button_t* button, bool value, bool publish) {
     if (button->pressed == value) {
-        return 0;
+        return;
     }
     button->pressed = value;
-    return 1;
+    if (publish) {
+        char *msg = str_of_button(button);
+        if (UART_DEBUG) {
+            ets_printf("%s", msg);
+        }
+        // uart_write_bytes(uart_num, msg, strlen(msg));
+        free(msg);
+    }
+    return;
 }
 
-int update_joystick(Joystick_t* joystick, float x, float y) {
+void update_joystick(Joystick_t* joystick, float x, float y, bool publish) {
     if (joystick->x == x && joystick->y == y) {
-        return 0;
+        return;
     }
     joystick->x = x;
     joystick->y = y;
-    return 1;
+    if (publish) {
+        char *msg = str_of_joystick(joystick);
+        if (UART_DEBUG) {
+            ets_printf("%s", msg);
+        }
+        // uart_write_bytes(uart_num, msg, strlen(msg));
+        free(msg);
+    }
+    return;
 }
 
-int update_trigger(Trigger_t* trigger, float value) {
+void update_trigger(Trigger_t* trigger, float value, bool publish) {
     if (trigger->val == value) {
-        return 0;
+        return;
     }
     trigger->val = value;
-    return 1;
+    if (publish) {
+        char *msg = str_of_trigger(trigger);
+        if (UART_DEBUG) {
+            ets_printf("%s", msg);
+        }
+        // uart_write_bytes(uart_num, msg, strlen(msg));
+        free(msg);
+    }
+    return;
 }
 
-int update_dpad(DPad_t* dpad, DPadDir_t dir) {
+void update_dpad(DPad_t* dpad, DPadDir_t dir, bool publish) {
     if (dpad->dir == dir) {
-        return 0;
+        return;
     }
     dpad->dir = dir;
-    return 1;
+    if (publish) {
+        char *msg = str_of_dpad(dpad);
+        if (UART_DEBUG) {
+            ets_printf("%s", msg);
+        }
+        // uart_write_bytes(uart_num, msg, strlen(msg));
+        free(msg);
+    }
+    return;
 }
 
 void init_controller(ConState_t *state) {
@@ -207,68 +248,67 @@ void init_controller(ConState_t *state) {
     state->DPD = (DPad_t) {"DPD", (DPadDir_t) (0x08)};
 }
 
-int *update_controller(ConState_t* state, StadiaRep_t* rep) {
+void update_controller(ConState_t* state, StadiaRep_t* rep) {
     // Store an array indicating whether each component of the state changed
-    int *changed = malloc(sizeof(int) * 20);
     // We need to update every component of the state with correct report data
     // We will go in order of the report structure
 
     // DPAD UPDATE
     assert (rep->dpad <= 8);
-    changed[0]  = update_dpad(&state->DPD, (DPadDir_t) rep->dpad);
+    update_dpad(&state->DPD, (DPadDir_t) rep->dpad, publish_controls[0]);
 
     // BUTTONS UPDATE
-    changed[1]  = update_button(&state->RSB, (rep->buttons1 & 0x80) != 0);
-    changed[2]  = update_button(&state->OPT, (rep->buttons1 & 0x40) != 0);
-    changed[3]  = update_button(&state->MEN, (rep->buttons1 & 0x20) != 0);
-    changed[4]  = update_button(&state->STB, (rep->buttons1 & 0x10) != 0);
-    changed[5]  = update_button(&state->RTB, (rep->buttons1 & 0x08) != 0);
-    changed[6]  = update_button(&state->LTB, (rep->buttons1 & 0x04) != 0);
-    changed[7]  = update_button(&state->GAS, (rep->buttons1 & 0x02) != 0);
-    changed[8]  = update_button(&state->CPT, (rep->buttons1 & 0x01) != 0);
-    changed[9]  = update_button(&state->LAB, (rep->buttons2 & 0x40) != 0);
-    changed[10] = update_button(&state->LBB, (rep->buttons2 & 0x20) != 0);
-    changed[11] = update_button(&state->LXB, (rep->buttons2 & 0x10) != 0);
-    changed[12] = update_button(&state->LYB, (rep->buttons2 & 0x08) != 0);
-    changed[13] = update_button(&state->LBP, (rep->buttons2 & 0x04) != 0);
-    changed[14] = update_button(&state->RBP, (rep->buttons2 & 0x02) != 0);
-    changed[15] = update_button(&state->LSB, (rep->buttons2 & 0x01) != 0);
+    update_button(&state->RSB, (rep->buttons1 & 0x80) != 0, publish_controls[1]);
+    update_button(&state->OPT, (rep->buttons1 & 0x40) != 0, publish_controls[2]);
+    update_button(&state->MEN, (rep->buttons1 & 0x20) != 0, publish_controls[3]);
+    update_button(&state->STB, (rep->buttons1 & 0x10) != 0, publish_controls[4]);
+    update_button(&state->RTB, (rep->buttons1 & 0x08) != 0, publish_controls[5]);
+    update_button(&state->LTB, (rep->buttons1 & 0x04) != 0, publish_controls[6]);
+    update_button(&state->GAS, (rep->buttons1 & 0x02) != 0, publish_controls[7]);
+    update_button(&state->CPT, (rep->buttons1 & 0x01) != 0, publish_controls[8]);
+    update_button(&state->LAB, (rep->buttons2 & 0x40) != 0, publish_controls[9]);
+    update_button(&state->LBB, (rep->buttons2 & 0x20) != 0, publish_controls[10]);
+    update_button(&state->LXB, (rep->buttons2 & 0x10) != 0, publish_controls[11]);
+    update_button(&state->LYB, (rep->buttons2 & 0x08) != 0, publish_controls[12]);
+    update_button(&state->LBP, (rep->buttons2 & 0x04) != 0, publish_controls[13]);
+    update_button(&state->RBP, (rep->buttons2 & 0x02) != 0, publish_controls[14]);
+    update_button(&state->LSB, (rep->buttons2 & 0x01) != 0, publish_controls[15]);
 
     // JOYSTICKS UPDATE
-    changed[16] = update_joystick(&state->LJS, sign_pct(rep->stickX),
-                                  -sign_pct(rep->stickY));
-    changed[17] = update_joystick(&state->RJS, sign_pct(rep->stickZ),
-                                    -sign_pct(rep->stickRz));
+    update_joystick(&state->LJS, sign_pct(rep->stickX), -sign_pct(rep->stickY),
+                    publish_controls[16]);
+    update_joystick(&state->RJS, sign_pct(rep->stickZ), -sign_pct(rep->stickRz),
+                    publish_controls[17]);
     
     // TRIGGERS UPDATE
-    changed[18] = update_trigger(&state->LTR, unsign_pct(rep->brake));
-    changed[19] = update_trigger(&state->RTR, unsign_pct(rep->throttle));
+    update_trigger(&state->LTR, unsign_pct(rep->brake), publish_controls[18]);
+    update_trigger(&state->RTR, unsign_pct(rep->throttle), publish_controls[19]);
 
-    return changed;
+    return;
 }
 
 void print_controller(ConState_t* state) {
-    printf("==============================\n");
-    printf("      Controller State:\n");
-    printf("LAB: %d\n", state->LAB.pressed);
-    printf("LBB: %d\n", state->LBB.pressed);
-    printf("LXB: %d\n", state->LXB.pressed);
-    printf("LYB: %d\n", state->LYB.pressed);
-    printf("LTB: %d\n", state->LTB.pressed);
-    printf("RTB: %d\n", state->RTB.pressed);
-    printf("RSB: %d\n", state->RSB.pressed);
-    printf("LSB: %d\n", state->LSB.pressed);
-    printf("STB: %d\n", state->STB.pressed);
-    printf("MEN: %d\n", state->MEN.pressed);
-    printf("CPT: %d\n", state->CPT.pressed);
-    printf("GAS: %d\n", state->GAS.pressed);
-    printf("OPT: %d\n", state->OPT.pressed);
-    printf("RBP: %d\n", state->RBP.pressed);
-    printf("LBP: %d\n", state->LBP.pressed);
-    printf("LJS: (%f, %f)\n", state->LJS.x, state->LJS.y);
-    printf("RJS: (%f, %f)\n", state->RJS.x, state->RJS.y);
-    printf("LTR: %f\n", state->LTR.val);
-    printf("RTR: %f\n", state->RTR.val);
-    printf("DPD: %d\n", state->DPD.dir);
-    printf("==============================\n");
+    ets_printf("==============================\n");
+    ets_printf("      Controller State:\n");
+    ets_printf("LAB: %d\n", state->LAB.pressed);
+    ets_printf("LBB: %d\n", state->LBB.pressed);
+    ets_printf("LXB: %d\n", state->LXB.pressed);
+    ets_printf("LYB: %d\n", state->LYB.pressed);
+    ets_printf("LTB: %d\n", state->LTB.pressed);
+    ets_printf("RTB: %d\n", state->RTB.pressed);
+    ets_printf("RSB: %d\n", state->RSB.pressed);
+    ets_printf("LSB: %d\n", state->LSB.pressed);
+    ets_printf("STB: %d\n", state->STB.pressed);
+    ets_printf("MEN: %d\n", state->MEN.pressed);
+    ets_printf("CPT: %d\n", state->CPT.pressed);
+    ets_printf("GAS: %d\n", state->GAS.pressed);
+    ets_printf("OPT: %d\n", state->OPT.pressed);
+    ets_printf("RBP: %d\n", state->RBP.pressed);
+    ets_printf("LBP: %d\n", state->LBP.pressed);
+    ets_printf("LJS: (%f, %f)\n", state->LJS.x, state->LJS.y);
+    ets_printf("RJS: (%f, %f)\n", state->RJS.x, state->RJS.y);
+    ets_printf("LTR: %f\n", state->LTR.val);
+    ets_printf("RTR: %f\n", state->RTR.val);
+    ets_printf("DPD: %d\n", state->DPD.dir);
+    ets_printf("==============================\n");
 }

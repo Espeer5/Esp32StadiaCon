@@ -12,10 +12,14 @@
 #define _GLOBALCONST_H_
 
 #include <stdbool.h>
+#include "driver/uart.h"
 
 // One entry for each control on the controller indicating whether or not to
 // publish notifications for the control state
 extern bool publish_controls[20];
+
+// The UART port to output notifications on
+extern const uart_port_t uart_num;
 
 // Tag for the GATT client. Used for logging globally, not just within gatt
 // client files.
@@ -25,6 +29,9 @@ extern bool publish_controls[20];
 #define remote_device_name "StadiaBWVQ-855f"
 
 // Toggle debug logging for the GATT client
-#define GATTC_DEBUG 0
+#define GATTC_DEBUG false
+
+// Toggle debug logging for UART output
+#define UART_DEBUG true
 
 #endif /* #ifndef _GLOBALCONST_H_ */

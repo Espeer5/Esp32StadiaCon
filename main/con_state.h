@@ -214,9 +214,8 @@ typedef struct ConState {
  * 
  * @param button A pointer to the Button_t struct to update.
  * @param val The new value to update the button with.
- * @return 1 if the button changed, 0 otherwise.
 */
-int update_button(Button_t* button, bool val);
+void update_button(Button_t* button, bool val, bool publish);
 
 /**
  * @brief Update the state of a joystick with new values fetched from a report.
@@ -229,9 +228,8 @@ int update_button(Button_t* button, bool val);
  * @param joystick A pointer to the Joystick_t struct to update.
  * @param x The new x value to update the joystick with.
  * @param y The new y value to update the joystick with.
- * @return 1 if the joystick x-axis changed, 2 if the joystick y-axis changed, 3 if both changed, 4
 */
-int update_joystick(Joystick_t* joystick, float x, float y);
+void update_joystick(Joystick_t* joystick, float x, float y, bool publish);
 
 /**
  * @brief Update the state of a trigger with a new value fetched from a report.
@@ -244,9 +242,8 @@ int update_joystick(Joystick_t* joystick, float x, float y);
  * @param trigger A pointer to the Trigger_t struct to update.
  * @param val The new value to update the trigger with.
  * @param pressed The new pressed value to update the trigger with.
- * @return 1 if the trigger changed, 0 otherwise.
 */
-int update_trigger(Trigger_t* trigger, float val);
+void update_trigger(Trigger_t* trigger, float val, bool publish);
 
 /**
  * @brief Update the state of a D-pad with a new value fetched from a report.
@@ -258,9 +255,8 @@ int update_trigger(Trigger_t* trigger, float val);
  * 
  * @param dpad A pointer to the DPad_t struct to update.
  * @param dir The new value to update the D-pad with.
- * @return 1 if the D-pad changed, 0 otherwise.
 */
-int update_dpad(DPad_t* dpad, DPadDir_t dir);
+void update_dpad(DPad_t* dpad, DPadDir_t dir, bool publish);
 
 /**
  * @brief Initialize the controller state representation with default values.
@@ -284,10 +280,8 @@ void init_controller(ConState_t* state);
  * 
  * @param state A pointer to the ConState_t struct to update.
  * @param rep A pointer to the StadiaRep_t struct to update the controller with.
- * @return A pointer to an integer array containing the indices of the updated
- *         controls.
 */
-int *update_controller(ConState_t* state, StadiaRep_t* rep);
+void update_controller(ConState_t* state, StadiaRep_t* rep);
 
 /**
  * @brief Print a controller state to the console for debugging puposes.
