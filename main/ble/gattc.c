@@ -12,9 +12,9 @@
  * https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_security_client
 */
 
-#include "rep_queue.h"
-#include "gattc.h"
-#include "auth_gap.h"
+#include "publish/rep_queue.h"
+#include "ble/gattc.h"
+#include "ble/auth_gap.h"
 #include "globalconst.h"
 
 // Placeholder for an empty char handle when searching all chars in service

@@ -4,10 +4,10 @@
  *        over BLE.
 */
 
-#include "bt_init.h"
-#include "auth_gap.h"
-#include "rep_queue.h"
-#include "con_state.h"
+#include "ble/bt_init.h"
+#include "ble/auth_gap.h"
+#include "publish/rep_queue.h"
+#include "publish/con_state.h"
 #include "globalconst.h"
 
 #include "freertos/freeRTOS.h"
