@@ -99,9 +99,13 @@ $(function(){ initResizable(false); });
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="globalconst_8h_source.html">globalconst.h</a>&quot;</code><br />
+<code>#include &quot;driver/uart.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:ae871136e9b721e057141a44db7d8057b" id="r_ae871136e9b721e057141a44db7d8057b"><td class="memItemLeft" align="right" valign="top"><a id="ae871136e9b721e057141a44db7d8057b" name="ae871136e9b721e057141a44db7d8057b"></a>
+const uart_port_t&#160;</td><td class="memItemRight" valign="bottom"><b>uart_num</b> = UART_NUM_0</td></tr>
+<tr class="separator:ae871136e9b721e057141a44db7d8057b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bd6b24457c5f62be39d31d871e3124b" id="r_a2bd6b24457c5f62be39d31d871e3124b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2bd6b24457c5f62be39d31d871e3124b">publish_controls</a> [20]</td></tr>
 <tr class="separator:a2bd6b24457c5f62be39d31d871e3124b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -124,14 +128,10 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
 <div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
 <div class="line">    <span class="keyword">false</span>,  </div>
 <div class="line">    <span class="keyword">false</span>,  </div>
 <div class="line">    <span class="keyword">false</span>,  </div>
 <div class="line">    <span class="keyword">false</span>,  </div>
-<div class="line">    <span class="keyword">true</span>,   </div>
 <div class="line">    <span class="keyword">false</span>,  </div>
 <div class="line">    <span class="keyword">false</span>,  </div>
 <div class="line">    <span class="keyword">false</span>,  </div>
@@ -139,6 +139,10 @@ Variables</h2></td></tr>
 <div class="line">    <span class="keyword">true</span>,   </div>
 <div class="line">    <span class="keyword">true</span>,   </div>
 <div class="line">    <span class="keyword">true</span>,   </div>
+<div class="line">    <span class="keyword">true</span>,   </div>
+<div class="line">    <span class="keyword">true</span>,   </div>
+<div class="line">    <span class="keyword">true</span>,   </div>
+<div class="line">    <span class="keyword">false</span>,  </div>
 <div class="line">    <span class="keyword">true</span>,   </div>
 <div class="line">    <span class="keyword">true</span>,   </div>
 <div class="line">    <span class="keyword">true</span>,   </div>

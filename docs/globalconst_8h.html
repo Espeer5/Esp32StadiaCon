@@ -99,6 +99,7 @@ $(function(){ initResizable(false); });
 <p>Global constants and definitions for the ESP32C6 to connect to a Google Stadia Controller over BLE.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &quot;driver/uart.h&quot;</code><br />
 </div>
 <p><a href="globalconst_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -111,14 +112,20 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>remote_device_name</b>&#160;&#160;&#160;&quot;StadiaBWVQ-855f&quot;</td></tr>
 <tr class="separator:acabd0a7a803aea79b3d266595803a647"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3feaa7902cfec52662eefcddeeb05f1" id="r_af3feaa7902cfec52662eefcddeeb05f1"><td class="memItemLeft" align="right" valign="top"><a id="af3feaa7902cfec52662eefcddeeb05f1" name="af3feaa7902cfec52662eefcddeeb05f1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>GATTC_DEBUG</b>&#160;&#160;&#160;0</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GATTC_DEBUG</b>&#160;&#160;&#160;false</td></tr>
 <tr class="separator:af3feaa7902cfec52662eefcddeeb05f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4669ce3240dc839b04fd805358ee0fa" id="r_ab4669ce3240dc839b04fd805358ee0fa"><td class="memItemLeft" align="right" valign="top"><a id="ab4669ce3240dc839b04fd805358ee0fa" name="ab4669ce3240dc839b04fd805358ee0fa"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>UART_DEBUG</b>&#160;&#160;&#160;false</td></tr>
+<tr class="separator:ab4669ce3240dc839b04fd805358ee0fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a2bd6b24457c5f62be39d31d871e3124b" id="r_a2bd6b24457c5f62be39d31d871e3124b"><td class="memItemLeft" align="right" valign="top"><a id="a2bd6b24457c5f62be39d31d871e3124b" name="a2bd6b24457c5f62be39d31d871e3124b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>publish_controls</b> [20]</td></tr>
 <tr class="separator:a2bd6b24457c5f62be39d31d871e3124b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae871136e9b721e057141a44db7d8057b" id="r_ae871136e9b721e057141a44db7d8057b"><td class="memItemLeft" align="right" valign="top"><a id="ae871136e9b721e057141a44db7d8057b" name="ae871136e9b721e057141a44db7d8057b"></a>
+const uart_port_t&#160;</td><td class="memItemRight" valign="bottom"><b>uart_num</b></td></tr>
+<tr class="separator:ae871136e9b721e057141a44db7d8057b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Global constants and definitions for the ESP32C6 to connect to a Google Stadia Controller over BLE. </p>
