@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['load_5fstadia_5frep_0',['load_stadia_rep',['../rep__queue_8c.html#aa43ad734baa023e2dad4b318b287739a',1,'load_stadia_rep(uint8_t *buffer, size_t len):&#160;rep_queue.c'],['../rep__queue_8h.html#aa43ad734baa023e2dad4b318b287739a',1,'load_stadia_rep(uint8_t *buffer, size_t len):&#160;rep_queue.c']]]
+  ['joystick_0',['Joystick',['../struct_joystick.html',1,'']]],
+  ['joystick_5ft_1',['Joystick_t',['../con__state_8h.html#abda4bcfd3086109f0b083a40999c0ad4',1,'con_state.h']]]
 ];

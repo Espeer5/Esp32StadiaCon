@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['unsign_5fpct_0',['unsign_pct',['../con__state_8c.html#a9f9f4a7ce4da453883ed831777e48a57',1,'con_state.c']]],
-  ['update_5fbutton_1',['update_button',['../con__state_8c.html#a4437d378a5c1a38cfedc0aac919fd9cf',1,'update_button(Button_t *button, bool value, bool publish):&#160;con_state.c'],['../con__state_8h.html#a4f9b86144d24a08020aee9ff78ff5467',1,'update_button(Button_t *button, bool val, bool publish):&#160;con_state.c']]],
-  ['update_5fcontroller_2',['update_controller',['../con__state_8c.html#a8652d1412f5aa8996f66788072440b64',1,'update_controller(ConState_t *state, StadiaRep_t *rep):&#160;con_state.c'],['../con__state_8h.html#a8652d1412f5aa8996f66788072440b64',1,'update_controller(ConState_t *state, StadiaRep_t *rep):&#160;con_state.c']]],
-  ['update_5fdpad_3',['update_dpad',['../con__state_8c.html#a14472de1b9679bab668f86d2d2cc87da',1,'update_dpad(DPad_t *dpad, DPadDir_t dir, bool publish):&#160;con_state.c'],['../con__state_8h.html#a14472de1b9679bab668f86d2d2cc87da',1,'update_dpad(DPad_t *dpad, DPadDir_t dir, bool publish):&#160;con_state.c']]],
-  ['update_5fjoystick_4',['update_joystick',['../con__state_8c.html#a5165ec4ba940558a8c1020f7fda4abc4',1,'update_joystick(Joystick_t *joystick, float x, float y, bool publish):&#160;con_state.c'],['../con__state_8h.html#a5165ec4ba940558a8c1020f7fda4abc4',1,'update_joystick(Joystick_t *joystick, float x, float y, bool publish):&#160;con_state.c']]],
-  ['update_5ftrigger_5',['update_trigger',['../con__state_8c.html#a025ff9fbb5a98588f01bb228f9c5f2e3',1,'update_trigger(Trigger_t *trigger, float value, bool publish):&#160;con_state.c'],['../con__state_8h.html#a316b19b4d7cea30b792028ab6dcdaae9',1,'update_trigger(Trigger_t *trigger, float val, bool publish):&#160;con_state.c']]]
+  ['sign_5fpct_0',['sign_pct',['../con__state_8c.html#a370ec536d5fae7190cdc6f3f48f81315',1,'con_state.c']]],
+  ['stadiacon_1',['StadiaCon',['../index.html',1,'']]],
+  ['stadiarep_2',['StadiaRep',['../struct_stadia_rep.html',1,'']]],
+  ['stadiarep_5ft_3',['StadiaRep_t',['../rep__queue_8h.html#a18a642d8c9a7dbb0ed7d84cce772d4cf',1,'rep_queue.h']]],
+  ['str_5fof_5fbutton_4',['str_of_button',['../con__state_8c.html#aae4e22f3e8bc7068b7006d2ceb682ab1',1,'str_of_button(Button_t *button):&#160;con_state.c'],['../con__state_8h.html#aae4e22f3e8bc7068b7006d2ceb682ab1',1,'str_of_button(Button_t *button):&#160;con_state.c']]],
+  ['str_5fof_5fdpad_5',['str_of_dpad',['../con__state_8c.html#ac9cfa3c62a21eaecc5a74798bf92eee6',1,'str_of_dpad(DPad_t *dpad):&#160;con_state.c'],['../con__state_8h.html#ac9cfa3c62a21eaecc5a74798bf92eee6',1,'str_of_dpad(DPad_t *dpad):&#160;con_state.c']]],
+  ['str_5fof_5fdpad_5fdir_6',['str_of_dpad_dir',['../con__state_8c.html#a12725d45957093ad72e4e9e9de34c276',1,'str_of_dpad_dir(DPadDir_t dir):&#160;con_state.c'],['../con__state_8h.html#a12725d45957093ad72e4e9e9de34c276',1,'str_of_dpad_dir(DPadDir_t dir):&#160;con_state.c']]],
+  ['str_5fof_5fjoystick_7',['str_of_joystick',['../con__state_8c.html#a28f88f1c6c4da3504d81838dfbf2870d',1,'str_of_joystick(Joystick_t *joystick):&#160;con_state.c'],['../con__state_8h.html#a28f88f1c6c4da3504d81838dfbf2870d',1,'str_of_joystick(Joystick_t *joystick):&#160;con_state.c']]],
+  ['str_5fof_5ftrigger_8',['str_of_trigger',['../con__state_8c.html#aeead23becf876af4148ecc2a791cb4a8',1,'str_of_trigger(Trigger_t *trigger):&#160;con_state.c'],['../con__state_8h.html#aeead23becf876af4148ecc2a791cb4a8',1,'str_of_trigger(Trigger_t *trigger):&#160;con_state.c']]],
+  ['structure_9',['Structure',['../index.html#autotoc_md4',1,'']]]
 ];

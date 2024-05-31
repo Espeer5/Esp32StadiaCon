@@ -12,6 +12,20 @@ Notice that the triggers have two IDs assigned each, one which ranges from 0-100
 
 The joysticks also have two assigned IDs, one for the stick pointing direction (LJS/RJS) and one for the button activated by pressing down on the stick (LSB/RSB).
 
+## Output Format:
+
+Each button command from the controller is output as its own report line in the following format:
+    
+    ```<ID>;<Value>\n```
+
+The value has different types for the different types of controls:
+  - Buttons: 0 for released, 1 for pressed
+  - Triggers: 0-100 (percent) for the trigger value
+  - Joysticks: ```<X>;<Y>``` for the x and y values of the joystick. Each ranges from -100 to 100 percent. Left/down are negative, right/up are positive.
+  - D-Pad: String compass direction (N, NE, E, SE, S, SW, W, NW). "NO" output for no direction pressed.
+
+Each control is output when its value changes - so for buttons, outputs are triggered on press and on release.
+
 ## Configuration:
 
 The options configureable to a user of this package may be edited in the globalconst.h/globalconst.c files under the main directory. The options are:

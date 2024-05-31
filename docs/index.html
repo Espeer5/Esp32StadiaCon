@@ -96,6 +96,16 @@ Control IDS:</h1>
 <p>Notice that the triggers have two IDs assigned each, one which ranges from 0-100 (LTR/RTR) as the trigger is pressed, and another which is digital (LTB/RTB).</p>
 <p>The joysticks also have two assigned IDs, one for the stick pointing direction (LJS/RJS) and one for the button activated by pressing down on the stick (LSB/RSB).</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
+Output Format:</h1>
+<p>Each button command from the controller is output as its own report line in the following format: </p><pre class="fragment">```&lt;ID&gt;;&lt;Value&gt;\n```
+</pre><p> The value has different types for the different types of controls:</p><ul>
+<li>Buttons: 0 for released, 1 for pressed</li>
+<li>Triggers: 0-100 (percent) for the trigger value</li>
+<li>Joysticks: <code>&lt;X&gt;;&lt;Y&gt;</code> for the x and y values of the joystick. Each ranges from -100 to 100 percent. Left/down are negative, right/up are positive.</li>
+<li>D-Pad: String compass direction (N, NE, E, SE, S, SW, W, NW). "NO" output for no direction pressed.</li>
+</ul>
+<p>Each control is output when its value changes - so for buttons, outputs are triggered on press and on release.</p>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Configuration:</h1>
 <p>The options configureable to a user of this package may be edited in the <a class="el" href="globalconst_8h.html" title="Global constants and definitions for the ESP32C6 to connect to a Google Stadia Controller over BLE.">globalconst.h</a>/globalconst.c files under the main directory. The options are:</p>
 <ul>
@@ -105,7 +115,7 @@ Configuration:</h1>
 <li><code>const uart_port_t uart_num</code>: The UART port to write the controller commands to. This should be set to the port that the USB/UART bridge is connected to on the esp32C6.</li>
 <li><code>bool publish_controls[20]</code>: One bool for every output identifier on the controller. If set to true, the output of that control will be written to the UART port. If set to false, the output of that control will be ignored.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Structure</h1>
 <p>The ble utility functions are organized into modules:</p><ul>
 <li>ble - all bluetooth functionality<ul>
